@@ -1,0 +1,44 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.2' apply false
+//	id "io.swagger.core.v3.swagger-gradle-plugin" version "2.2.20"
+
+//	id "io.freefair.lombok" version "8.4"
+}
+
+
+subprojects {
+
+	// here we define what DSL plugin to be used (methods bootJar{}, jar {} etc.)
+	// with dependency-management we do not need to specify versions that are defined under plugins block {}
+	apply plugin: 'java'
+	apply plugin: 'io.spring.dependency-management'
+	apply plugin: 'org.springframework.boot'
+
+
+	group = 'com.lukepeace.projects'
+	version = '0.0.1-SNAPSHOT'
+
+	java {
+		sourceCompatibility = '17'
+	}
+
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		compileOnly 'org.projectlombok:lombok:1.18.30'
+		annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+		testCompileOnly 'org.projectlombok:lombok:1.18.30'
+		testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+		runtimeOnly 'com.h2database:h2'
+
+		implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
+
+
+	}
+}
