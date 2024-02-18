@@ -1,4 +1,4 @@
-package com.lukepeace.projects.nevyhodcore.aspect;
+package com.lukepeace.projects.nevyhodcore.aop;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;

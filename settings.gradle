@@ -1,4 +1,4 @@
 rootProject.name = 'nevyhod-gui-app'
 include 'nevyhod-core'
 include 'nevyhod-gui'
-
+include 'java-common'

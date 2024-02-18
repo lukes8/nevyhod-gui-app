@@ -10,11 +10,20 @@ jar {
 }
 
 dependencies {
+    implementation project(':java-common')
+
     implementation project(':nevyhod-core')
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+
+}
+
+bootRun {
+    jvmArgs = [
+            "-Dcom.lukepeace.projects.env=DEV",
+            "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:9999"
+    ]
 }
 
 tasks.named('test') {

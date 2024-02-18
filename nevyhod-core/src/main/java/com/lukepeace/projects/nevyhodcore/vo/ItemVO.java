@@ -1,16 +1,22 @@
 package com.lukepeace.projects.nevyhodcore.vo;
 
-import lombok.Builder;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.Max;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Data
-@Builder
+@Builder @ToString @AllArgsConstructor @Setter @Getter @NoArgsConstructor
 public class ItemVO {
-    private Long id;
-    private String title;
+
+//    @JsonUnwrapped
+//    private ItemIdVO id2;
+
+    @JsonProperty("ID") private Long id;
+    @JsonProperty("TITLE") private String title;
     private String category;
+    @Max(10)
     private Double price;
     private LocalDateTime createdDate;
     private Integer amount;

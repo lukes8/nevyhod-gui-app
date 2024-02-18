@@ -1,0 +1,17 @@
+def versions = [
+        querydsl: '5.0.0',
+        spring: '3.2.2'
+]
+
+def commons = [
+        querydsl: [
+                jpa: "com.querydsl:querydsl-jpa:$versions.querydsl:jakarta",
+                apt: "com.querydsl:querydsl-apt:$versions.querydsl:jakarta"
+        ],
+        spring: [
+                validator: "org.springframework.boot:spring-boot-starter-validation:$versions.spring"
+        ]
+]
+
+
+ext.libraries = ['commons': commons]
