@@ -1,0 +1,60 @@
+spring:
+    profiles.active: DEV_PROFILE
+
+---
+server:
+    port: 8080
+spring:
+    datasource:
+        driver-class-name: org.h2.Driver
+        password: admin
+        url: jdbc:h2:mem:testdb
+        username: sa
+    h2:
+        console:
+            enabled: true
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        hibernate:
+            ddl-auto: update
+        show-sql: true
+    mvc:
+        format:
+            date-time: iso
+    security:
+        whitelist: >
+            /swagger-ui.html
+            /swagger-ui*/**
+            /rest/api/orders
+springdoc:
+    api-docs:
+        path: /api-docs
+    swagger-ui:
+        enabled: true
+        path: /swagger-ui.html
+test:
+    user:
+        password: luke123
+        username: luke
+
+heartbeat:
+    cron: 0 * * * * *
+log4j:
+    category:
+        org:
+            springframework:
+                web:
+                    servlet:
+                        mvc:
+                            method:
+                                annotation:
+                                    RequestMappingHandlerMapping: INFO
+
+
+logging:
+    level:
+        org:
+            springframework:
+                web: TRACE
+        web: TRACE
+

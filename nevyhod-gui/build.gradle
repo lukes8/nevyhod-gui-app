@@ -1,5 +1,3 @@
-
-
 // here are methods from DSL of plugin - org.springframework.boot
 bootJar {
     enabled = true
@@ -11,12 +9,35 @@ jar {
 
 dependencies {
     implementation project(':java-common')
-
     implementation project(':nevyhod-core')
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.data:spring-data-jdbc-core:1.2.1.RELEASE'
 
+}
+
+def urlFile = { url, name, token ->
+
+    File file = new File("$buildDir/downloads/${name}.txt")
+    file.parentFile.mkdirs()
+    byte[] fileContent = new URL(url).getBytes()
+    File f = new File(name)
+    java.io.FileOutputStream fos = new FileOutputStream(file)
+    fos.write(fileContent)
+    fos.close()
+    files(file.absolutePath)
+
+}
+
+tasks.register('hello') {
+    doLast {
+        println 'Feed from Seznam Finance News!'
+        def url = "https://www.seznamzpravy.cz/sekce/ekonomika-finance-299"
+        def name = "seznam-feed"
+        urlFile(url, name, 'token')
+    }
 }
 
 bootRun {

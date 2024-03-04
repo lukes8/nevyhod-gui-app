@@ -12,8 +12,8 @@ public class SwaggerOpenApiConfig {
     @Bean
     public OpenAPI usersMicroserviceOpenAPI() {
         return new OpenAPI()
-                .info(new Info().title("Your API Title")
-                        .description("Your API Description")
-                        .version("1.0"));
+                .info(new Info().title("Nevyhod REST API")
+                        .description("Open API v3")
+                        .version("3.0"));
     }
 }

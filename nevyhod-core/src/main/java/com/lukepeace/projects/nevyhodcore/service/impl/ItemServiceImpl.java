@@ -27,7 +27,9 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class ItemServiceImpl extends AbstractServiceImpl<Item, ItemVO, ItemRepository, Long, ItemFilter, ItemCriteria> implements ItemService {
+public class ItemServiceImpl extends
+        AbstractServiceImpl<Item, ItemVO, ItemRepository, Long, ItemFilter, ItemCriteria>
+    implements ItemService {
 
     @Autowired
     private ItemRepository itemRepository;
@@ -58,24 +60,23 @@ public class ItemServiceImpl extends AbstractServiceImpl<Item, ItemVO, ItemRepos
         return lstVO;
     }
 
-    @Override
-    public Page<ItemVO> findAll(ItemFilter filter) {
-
-        Page<ItemVO> all = super.findAll(filter);
-        return all;
-    }
+//    @Override
+//    public Page<ItemVO> findAll(ItemFilter filter) {
+//
+//        Page<ItemVO> all = super.findAll(filter);
+//        return all;
+//    }
 
     @Override
     public ItemVO findById(Long id) {
         return null;
     }
 
-    @Override
-    public ItemVO create(ItemVO item) throws GeneralException {
-        this.validateBeforeCreate(item, item.getId());
-        Item save = itemRepository.save(this.map2Entity(item, Item.class));
-        return this.map2VO(save, ItemVO.class);
-    }
+//    @Override
+//    public ItemVO create(ItemVO item) throws GeneralException {
+//        ItemVO itemVO = super.create(item, item.getId());
+//        return itemVO;
+//    }
 
     @Override
     public ItemVO delete(Long id) {

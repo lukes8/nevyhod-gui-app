@@ -22,4 +22,16 @@ public class LoggingAspect {
 
         return result;
     }
+
+    @Around("execution(* com.lukepeace.projects.common.security.*.*(..))")
+    public Object logLoginTime(ProceedingJoinPoint joinPoint) throws Throwable {
+        long startTime = System.currentTimeMillis();
+        Object result = joinPoint.proceed();
+        long endTime = System.currentTimeMillis();
+
+        String msg = "Login green " + joinPoint.getSignature() + " executed in " + (endTime - startTime) + "ms";
+        log.info(msg);
+
+        return result;
+    }
 }

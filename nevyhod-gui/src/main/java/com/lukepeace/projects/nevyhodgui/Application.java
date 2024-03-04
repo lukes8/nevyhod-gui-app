@@ -7,11 +7,13 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @ComponentScan({"com.lukepeace.projects.nevyhodcore", "com.lukepeace.projects.nevyhodgui", "com.lukepeace.projects.common"})
 @EnableJpaRepositories("com.lukepeace.projects.nevyhodcore.repository")
 @EntityScan("com.lukepeace.projects.nevyhodcore.entity")
+@EnableScheduling
 public class Application extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {

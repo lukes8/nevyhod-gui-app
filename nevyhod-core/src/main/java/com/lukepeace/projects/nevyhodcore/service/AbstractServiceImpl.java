@@ -1,10 +1,11 @@
 package com.lukepeace.projects.nevyhodcore.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lukepeace.projects.common.exceptions.GeneralException;
 import com.lukepeace.projects.common.exceptions.NevyhodExceptionCodes;
 import com.lukepeace.projects.common.util.PagingSortingFilter;
+import com.lukepeace.projects.common.util.ValidationUtilHelper;
 import com.lukepeace.projects.nevyhodcore.criteria.ICriteria;
-import com.lukepeace.projects.nevyhodcore.util.ValidationUtilHelper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -23,7 +24,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public abstract class AbstractServiceImpl<E, VO, R extends JpaRepository & QuerydslPredicateExecutor, ID, F extends PagingSortingFilter, CR extends ICriteria> {
+public abstract class AbstractServiceImpl<
+        E,
+        VO,
+        R extends JpaRepository & QuerydslPredicateExecutor,
+        ID,
+        F extends PagingSortingFilter,
+        CR extends ICriteria>
+    implements IService<VO, ID, F> {
 
     @Autowired
     private ModelMapper modelMapper;
@@ -32,9 +40,16 @@ public abstract class AbstractServiceImpl<E, VO, R extends JpaRepository & Query
     private ApplicationContext appContext;
 
     @Autowired
-    private ValidationUtilHelper validationUtilHelper;
+    private ValidationUtilHelper<E> validationUtilHelper;
+    @Autowired private ObjectMapper objectMapper;
+    private final int PARAM_TYPE_IDX_ENTITY = 0;
+    private final int PARAM_TYPE_IDX_VO = 1;
+    private final int PARAM_TYPE_IDX_REPO = 2;
+    private final int PARAM_TYPE_IDX_ID = 3;
+    private final int PARAM_TYPE_IDX_FILTER = 4;
+    private final int PARAM_TYPE_IDX_CRITERIA = 5;
 
-    protected Page<VO> findAll(F filter) {
+    public Page<VO> findAll(F filter) {
 
         R repo = getRepository();
         if (filter != null) {
@@ -54,6 +69,22 @@ public abstract class AbstractServiceImpl<E, VO, R extends JpaRepository & Query
 
     }
 
+    public VO create(VO objectVO, ID id) throws GeneralException {
+        E entity = map2Entity(objectVO);
+        validationUtilHelper.validate(entity);
+        validateBeforeCreate(id);
+        R repo = getRepository();
+        E save = (E)repo.save(entity);
+        return map2VO(save);
+    }
+    public void validateBeforeCreate(ID id) throws GeneralException {
+        R repo = getRepository();
+        if (repo.existsById(id)) {
+            throw validationUtilHelper.buildGeneralException(NevyhodExceptionCodes.ITEM_ALREADY_EXISTS);
+        }
+    }
+
+
     protected <S, VO> List<VO> map2VO(List<S> source, Class<VO> targetClass) {
         return source
                 .stream()
@@ -69,34 +100,15 @@ public abstract class AbstractServiceImpl<E, VO, R extends JpaRepository & Query
                 .collect(Collectors.toList());
     }
 
-    protected E map2Entity(VO source, Class<E> targetClass) {
-        return modelMapper.map(source, targetClass);
+    protected E map2Entity(VO source) {
+        Type t = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[PARAM_TYPE_IDX_ENTITY];
+        return modelMapper.map(source, t);
     }
 
-    protected VO map2VO(E source, Class<VO> targetClass) {
-        return modelMapper.map(source, targetClass);
+    protected VO map2VO(E source) {
+        Type t = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[PARAM_TYPE_IDX_VO];
+        return modelMapper.map(source, t);
     }
-
-    protected void validateBeforeCreate(VO objectVO, ID id) throws GeneralException {
-        String[] beanNames = appContext.getBeanNamesForType(ResolvableType.forType(new ParameterizedTypeReference<R>() {
-        }));
-        R repo = (R) appContext.getBean(beanNames[0]);
-        if (repo.existsById(id)) {
-            throw validationUtilHelper.buildGeneralException(NevyhodExceptionCodes.ITEM_ALREADY_EXISTS);
-        }
-
-    }
-
-    protected void validateExistence(ID id) throws GeneralException {
-        String[] beanNames = appContext.getBeanNamesForType(ResolvableType.forType(new ParameterizedTypeReference<R>() {
-        }));
-        R repo = (R) appContext.getBean(beanNames[0]);
-        if (!repo.existsById(id)) {
-            throw validationUtilHelper.buildGeneralException(NevyhodExceptionCodes.ITEMS_NOT_FOUND);
-        }
-
-    }
-
     protected void validateExistence() throws GeneralException {
         String[] beanNames = appContext.getBeanNamesForType(ResolvableType.forType(new ParameterizedTypeReference<R>() {
         }));
@@ -106,14 +118,6 @@ public abstract class AbstractServiceImpl<E, VO, R extends JpaRepository & Query
         }
 
     }
-
-    private final int PARAM_TYPE_IDX_ENTITY = 0;
-    private final int PARAM_TYPE_IDX_VO = 1;
-    private final int PARAM_TYPE_IDX_REPO = 2;
-    private final int PARAM_TYPE_IDX_ID = 3;
-    private final int PARAM_TYPE_IDX_FILTER = 4;
-    private final int PARAM_TYPE_IDX_CRITERIA = 5;
-//actServiceImpl<E, VO, R extends JpaRepository, ID, F extends PagingSortingFilter, CR> {
 
     private R getRepository() {
         Type t = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[PARAM_TYPE_IDX_REPO];
@@ -125,5 +129,9 @@ public abstract class AbstractServiceImpl<E, VO, R extends JpaRepository & Query
         Type t = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[PARAM_TYPE_IDX_CRITERIA];
         CR obj = (CR) appContext.getBean((Class)t);
         return obj;
+    }
+
+    protected ObjectMapper getObjectMapper() {
+        return objectMapper;
     }
 }

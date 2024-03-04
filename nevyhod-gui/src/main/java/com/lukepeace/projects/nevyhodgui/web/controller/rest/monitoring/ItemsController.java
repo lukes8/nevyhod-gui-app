@@ -34,7 +34,7 @@ public class ItemsController {
     }
 
     @GetMapping()
-    public Page<ItemVO> getAllItems(Pageable pageable,
+    public Page<ItemVO> getAll(Pageable pageable,
                                     @RequestParam(required = false) Long id,
                                     @RequestParam(required = false) Integer status) throws GeneralException {
         ItemFilter itemFilter = new ItemFilter(pageable);
@@ -64,7 +64,7 @@ public class ItemsController {
     @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ItemVO create(@RequestBody ItemVO item) throws GeneralException {
 
-        return itemService.create(item);
+        return itemService.create(item, item.getId());
     }
 
 }

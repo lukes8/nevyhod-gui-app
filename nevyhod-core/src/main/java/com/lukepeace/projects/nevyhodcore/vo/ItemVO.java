@@ -16,9 +16,9 @@ public class ItemVO {
     @JsonProperty("ID") private Long id;
     @JsonProperty("TITLE") private String title;
     private String category;
-    @Max(10)
     private Double price;
     private LocalDateTime createdDate;
     private Integer amount;
     private Integer status;
+    private Boolean disabled;
 }
