@@ -1,5 +1,6 @@
 package com.lukepeace.projects.common.security;
 
+import com.lukepeace.projects.common.util.GlobalConfiguration;
 import com.lukepeace.projects.common.vo.UserRoleVO;
 import com.lukepeace.projects.common.vo.UserVO;
 import lombok.extern.slf4j.Slf4j;
@@ -13,25 +14,20 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.intercept.AuthorizationFilter;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Configuration
@@ -48,19 +44,34 @@ public class SecurityConfig {
     @Autowired
     private Environment environment;
 
+    @Autowired
+    private GlobalConfiguration configuration;
+
     @Bean
     public SecurityFilterChain securityFilterChain(@Value("${spring.security.whitelist}") String[] whitelist, HttpSecurity http) throws Exception {
 
         log.info("whitelist: " + Arrays.stream(whitelist).collect(Collectors.joining()));
-        http
-                .authorizeHttpRequests((authorize) -> authorize
-                            .requestMatchers(whitelist)
-                            .permitAll()
-                            .anyRequest()
-                            .authenticated()
-                )
-                .httpBasic(Customizer.withDefaults())
-                .formLogin(Customizer.withDefaults());
+        log.info("green: " + configuration.getIsDev() + " " + configuration.getProfileName());
+
+        if (configuration.getIsDev()) {
+            http
+                    .cors(Customizer.withDefaults())
+                    .csrf(csrf -> csrf.disable() )
+                    .authorizeHttpRequests((authorize) -> authorize
+                            .anyRequest().permitAll()
+                    );
+        } else {
+            http
+                    .cors(Customizer.withDefaults())
+                    .csrf(csrf -> csrf.disable() )
+                    .authorizeHttpRequests((authorize) -> authorize
+                            .requestMatchers(whitelist).permitAll()
+                                .anyRequest()
+                                .authenticated()
+                    )
+                    .httpBasic(Customizer.withDefaults())
+                    .formLogin(Customizer.withDefaults());
+        }
 
         return http.build();
     }
@@ -74,6 +85,18 @@ public class SecurityConfig {
     }
 
     @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        // TODO check
+        log.info("CORS defined green");
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8080"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+    @Bean
     public UserDetailsService userDetailsService() {
         return cn -> {
             UserVO user = null;
@@ -82,6 +105,7 @@ public class SecurityConfig {
                 log.info("security dev profile");
                 roles.add(UserRoleVO.builder().role("ADMIN").build());
                 roles.add(UserRoleVO.builder().role("USER").build());
+                roles.add(UserRoleVO.builder().role("USER_MAINTENANCE").build());
                 user = UserVO.builder().username(testUser).password("{noop}" + testPassword).roles(roles).isEnabled(true).lastLogin(LocalDateTime.now()).build();
             } else {
                 //TODO get user from database for prod env
