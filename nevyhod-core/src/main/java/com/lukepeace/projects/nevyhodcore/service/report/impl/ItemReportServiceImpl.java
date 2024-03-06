@@ -20,8 +20,6 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
 
 @Data
 @Service @Qualifier("itemReportService")

@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 
 @Builder @Data
-public class UserRoleVO {
+public class UserDetailsRoleVO {
     private String role;
     private String description;
 }

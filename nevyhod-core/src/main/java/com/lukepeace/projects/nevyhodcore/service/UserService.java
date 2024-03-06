@@ -1,10 +1,8 @@
 package com.lukepeace.projects.nevyhodcore.service;
 
 import com.lukepeace.projects.common.exceptions.GeneralException;
-import com.lukepeace.projects.nevyhodcore.util.OrderFilter;
 import com.lukepeace.projects.nevyhodcore.util.UserFilter;
 import com.lukepeace.projects.nevyhodcore.vo.ItemVO;
-import com.lukepeace.projects.nevyhodcore.vo.OrderVO;
 import com.lukepeace.projects.nevyhodcore.vo.UserVO;
 
 import java.util.List;

@@ -119,7 +119,7 @@ public abstract class AbstractServiceImpl<
 
     }
 
-    private R getRepository() {
+    protected R getRepository() {
         Type t = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[PARAM_TYPE_IDX_REPO];
         R obj = (R) appContext.getBean((Class)t);
         return obj;

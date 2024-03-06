@@ -1,19 +1,14 @@
 package com.lukepeace.projects.nevyhodcore.service.report.impl;
 
 import com.lukepeace.projects.common.exceptions.GeneralException;
-import com.lukepeace.projects.nevyhodcore.criteria.ItemCriteria;
 import com.lukepeace.projects.nevyhodcore.criteria.OrderCriteria;
-import com.lukepeace.projects.nevyhodcore.entity.Item;
 import com.lukepeace.projects.nevyhodcore.entity.Order;
 import com.lukepeace.projects.nevyhodcore.factory.ReportNameParam;
-import com.lukepeace.projects.nevyhodcore.repository.ItemRepository;
 import com.lukepeace.projects.nevyhodcore.repository.OrderRepository;
 import com.lukepeace.projects.nevyhodcore.service.AbstractServiceImpl;
 import com.lukepeace.projects.nevyhodcore.service.report.IReportService;
 import com.lukepeace.projects.nevyhodcore.util.GeneralReportInfo;
-import com.lukepeace.projects.nevyhodcore.util.ItemFilter;
 import com.lukepeace.projects.nevyhodcore.util.OrderFilter;
-import com.lukepeace.projects.nevyhodcore.vo.ItemVO;
 import com.lukepeace.projects.nevyhodcore.vo.OrderVO;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

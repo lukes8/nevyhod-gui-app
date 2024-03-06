@@ -6,6 +6,7 @@ public final class Permission {
     public final static String ADMIN = "hasRole('ROLE_ADMIN')";
     public final static String USER_MAINTENANCE = "hasRole('ROLE_USER_MAINTENANCE')";
     public final static String TEST = "hasRole('ROLE_TEST')";
+    public final static String APPROVE_USER = ADMIN;
     public final static String ACCESS_ITEM_DATA = USER;
     public final static String MODIFY_ITEM_DATA = USER;
     public final static String CREATE_ITEM_DATA = USER;

@@ -23,9 +23,9 @@ spring:
       date-time: iso
   security:
     whitelist: >
-      /swagger-ui.html
-      /swagger-ui/**
-      /rest/api/orders
+      swagger-ui.html
+      swagger-ui/**
+      rest/api/orders
 
 springdoc:
   api-docs:

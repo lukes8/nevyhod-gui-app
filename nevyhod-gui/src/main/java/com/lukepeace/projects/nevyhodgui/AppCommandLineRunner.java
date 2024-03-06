@@ -1,7 +1,7 @@
 package com.lukepeace.projects.nevyhodgui;
 
 import com.lukepeace.projects.nevyhodcore.service.UserService;
-import com.lukepeace.projects.nevyhodcore.service.impl.UserServiceImpl;
+import com.lukepeace.projects.nevyhodcore.util.MockDataHelper;
 import com.lukepeace.projects.nevyhodcore.vo.UserVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class AppCommandLineRunner implements CommandLineRunner {
 
         if (devProfile) {
             log.info("Database of dummy users");
-            for (UserVO obj : UserServiceImpl.dummyList()) {
+            for (UserVO obj : MockDataHelper.dummyList()) {
                 log.info("created " + userService.create(obj).toString());
             }
         }

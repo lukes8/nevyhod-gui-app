@@ -6,4 +6,5 @@ public enum NevyhodExceptionCodes implements GeneralExceptionCodes {
     ITEM_DUPLICITE,
 
     ITEMS_NOT_FOUND,
+    BAD_CREDENTIALS
 }

@@ -1,18 +1,15 @@
 package com.lukepeace.projects.nevyhodcore.entity;
 
 import com.lukepeace.projects.nevyhodcore.entity.pk.UserRolePk;
-import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity(name = "USER_ROLE")
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Data
-@ToString
+@Entity(name = "USER_INFO_ROLE")
+@Data @Builder @AllArgsConstructor @NoArgsConstructor
 public class UserRole {
     @EmbeddedId
     private UserRolePk id;

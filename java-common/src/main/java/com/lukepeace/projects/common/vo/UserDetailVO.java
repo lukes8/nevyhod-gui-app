@@ -7,10 +7,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data @Builder
-public class UserVO {
+public class UserDetailVO {
     private String username;
     private String password;
     private LocalDateTime lastLogin;
-    private List<UserRoleVO> roles;
+    private List<UserDetailsRoleVO> roles;
     private boolean isEnabled;
 }

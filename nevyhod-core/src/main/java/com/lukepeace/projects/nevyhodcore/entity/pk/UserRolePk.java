@@ -2,15 +2,13 @@ package com.lukepeace.projects.nevyhodcore.entity.pk;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Embeddable
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Data
-@ToString
+@Data @Builder @AllArgsConstructor @NoArgsConstructor
 public class UserRolePk {
     @Column(name = "EMAIL")
     private String email;
