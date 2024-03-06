@@ -1,6 +1,5 @@
 package com.lukepeace.projects.nevyhodcore.vo;
 
-import com.lukepeace.projects.nevyhodcore.entity.UserRole;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -19,5 +18,5 @@ public class UserVO {
     private LocalDateTime createdDate;
     private LocalDateTime lastUpdatedDate;
     private LocalDateTime lastLoginDate;
-    private List<UserRole> roles;
+    private List<UserRoleVO> roles;
 }

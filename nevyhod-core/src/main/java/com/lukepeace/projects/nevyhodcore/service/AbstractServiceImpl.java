@@ -77,10 +77,24 @@ public abstract class AbstractServiceImpl<
         E save = (E)repo.save(entity);
         return map2VO(save);
     }
+
+    public void delete(ID id) throws GeneralException {
+        validateBeforeDelete(id);
+        R repo = getRepository();
+        repo.deleteById(id);
+    }
+
     public void validateBeforeCreate(ID id) throws GeneralException {
         R repo = getRepository();
         if (repo.existsById(id)) {
             throw validationUtilHelper.buildGeneralException(NevyhodExceptionCodes.ITEM_ALREADY_EXISTS);
+        }
+    }
+
+    public void validateBeforeDelete(ID id) throws GeneralException {
+        R repo = getRepository();
+        if (!repo.existsById(id)) {
+            throw validationUtilHelper.buildGeneralException(NevyhodExceptionCodes.ITEMS_NOT_FOUND);
         }
     }
 
@@ -133,5 +147,9 @@ public abstract class AbstractServiceImpl<
 
     protected ObjectMapper getObjectMapper() {
         return objectMapper;
+    }
+
+    protected ModelMapper getModelMapper() {
+        return modelMapper;
     }
 }

@@ -1,7 +1,9 @@
 package com.lukepeace.projects.nevyhodcore.service.impl;
 
+import com.lukepeace.projects.common.exceptions.GeneralException;
 import com.lukepeace.projects.nevyhodcore.criteria.GeneralCriteria;
 import com.lukepeace.projects.nevyhodcore.entity.UserRole;
+import com.lukepeace.projects.nevyhodcore.entity.pk.UserRolePk;
 import com.lukepeace.projects.nevyhodcore.repository.UserRoleRepository;
 import com.lukepeace.projects.nevyhodcore.service.AbstractServiceImpl;
 import com.lukepeace.projects.nevyhodcore.service.UserRoleService;
@@ -15,13 +17,17 @@ import java.util.List;
 @Service
 @Slf4j
 public class UserRoleServiceImpl extends
-        AbstractServiceImpl<UserRole, UserRoleVO, UserRoleRepository, String, GeneralFilter, GeneralCriteria>
+        AbstractServiceImpl<UserRole, UserRoleVO, UserRoleRepository, UserRolePk, GeneralFilter, GeneralCriteria>
     implements UserRoleService {
+    @Override
+    public List<UserRole> findAll() {
+        List<UserRole> all = super.getRepository().findAll();
+        return all;
+    }
 
     @Override
-    public List<UserRoleVO> findAll() {
-        List<UserRole> all = super.getRepository().findAll();
-        List<UserRoleVO> vos = super.map2VO(all);
-        return vos;
+    public UserRoleVO create(UserRoleVO role) throws GeneralException {
+        UserRoleVO obj = super.create(role, new UserRolePk(role.getId().getEmail(), role.getId().getName()));
+        return obj;
     }
 }

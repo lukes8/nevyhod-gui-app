@@ -4,7 +4,9 @@ import com.lukepeace.projects.common.exceptions.ClientErrorMessage;
 import com.lukepeace.projects.common.exceptions.GeneralException;
 import com.lukepeace.projects.common.exceptions.NevyhodExceptionCodes;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -25,12 +27,21 @@ public class GeneralRestControllerBase extends ResponseEntityExceptionHandler {
             code = ((GeneralException) e).getExceptionCode().toString();
             msg = ((GeneralException) e).getExceptionMessage();
         }
-        if (e instanceof BadCredentialsException) {
+        else if (e instanceof BadCredentialsException) {
             code = NevyhodExceptionCodes.BAD_CREDENTIALS.toString();
             msg = e.getMessage();
         }
+        else if (e instanceof ConstraintViolationException) {
+            code = NevyhodExceptionCodes.CONSTRAINT_VIOLATION.toString();
+            msg = e.getMessage();
+        }
+        else if (e instanceof InvalidDataAccessApiUsageException) {
+            code = NevyhodExceptionCodes.INVALID_DATA_ACCESS_API_USAGE.toString();
+            msg = e.getMessage();
+        }
+
         if (e != null) {
-            log.error("exception info: " + e.getMessage());
+            e.printStackTrace();
         }
         ClientErrorMessage m = new ClientErrorMessage(msg, code, request.getRequestURL().toString());
         return new ResponseEntity(m, HttpStatus.BAD_REQUEST);

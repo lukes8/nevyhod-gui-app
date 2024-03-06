@@ -63,8 +63,12 @@ public class ItemsController {
 
     @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ItemVO create(@RequestBody ItemVO item) throws GeneralException {
-
         return itemService.create(item, item.getId());
+    }
+    @PutMapping(value = "/delete/{id}")
+    public String create(@PathVariable Long id) throws GeneralException {
+        itemService.delete(id);
+        return "success";
     }
 
 }

@@ -78,8 +78,8 @@ public class ItemServiceImpl extends
 //    }
 
     @Override
-    public ItemVO delete(Long id) {
-        return null;
+    public void delete(Long id) throws GeneralException {
+        super.delete(id);
     }
 
     @Override

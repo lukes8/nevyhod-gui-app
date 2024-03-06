@@ -1,10 +1,11 @@
 ### How to run
 ./gradlew :nevyhod-gui:bootRun -x test --info
 
-### Open API v3
+### Useful urls
 http://localhost:8080/swagger-ui/api-docs
 http://localhost:8080/swagger-ui/api-docs.yaml
 http://localhost:8080/swagger-ui/index.html
+http://localhost:8080/h2-console/
 
 ### Resources for useful web sites
 - https://www.appsdeveloperblog.com/document-spring-rest-api-with-openapi-3swagger/

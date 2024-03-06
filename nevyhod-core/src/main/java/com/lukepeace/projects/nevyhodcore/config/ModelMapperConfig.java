@@ -22,7 +22,9 @@ public class ModelMapperConfig {
                     ItemVO source = context.getSource();
                     Item destination = context.getDestination();
 
-                    destination.setEnabled(!source.getDisabled());
+                    if (source.getDisabled() != null) {
+                        destination.setEnabled(!source.getDisabled());
+                    }
                 }
                 return context.getDestination();
             }
@@ -35,7 +37,9 @@ public class ModelMapperConfig {
                     Item source = context.getSource();
                     ItemVO destination = context.getDestination();
 
-                    destination.setDisabled(!source.getEnabled());
+                    if (source.getEnabled() != null) {
+                        destination.setDisabled(!source.getEnabled());
+                    }
                 }
                 return context.getDestination();
             }

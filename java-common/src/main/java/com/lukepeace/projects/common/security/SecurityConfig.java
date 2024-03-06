@@ -63,13 +63,19 @@ public class SecurityConfig {
             http
                     .cors(Customizer.withDefaults())
                     .csrf(csrf -> csrf.disable())
+                    .headers(header -> header.frameOptions(f -> f.disable()))//h2-console in frame
                     .authorizeHttpRequests((authorize) -> authorize
-//                            .requestMatchers("swagger-ui/**").permitAll()
-                            .requestMatchers(whitelist).permitAll()
+                            .requestMatchers("swagger-ui/**",
+                                    "/rest/api/user/login",
+                                    "/rest/api/test", "h2-console/**",
+                                    "resources/**")
+                            .permitAll()
+//                            .requestMatchers(whitelist).permitAll()
                             .anyRequest().authenticated()
                     )
                     .httpBasic(Customizer.withDefaults())
                     .formLogin(Customizer.withDefaults());
+            //TODO filter + sessionstateless
 
         } else {
             http

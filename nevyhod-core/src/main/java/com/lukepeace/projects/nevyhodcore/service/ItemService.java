@@ -19,7 +19,7 @@ public interface ItemService extends IService<ItemVO, Long, ItemFilter> {
 
 //    ItemVO create(ItemVO item) throws GeneralException;
 
-    ItemVO delete(Long id);
+    void delete(Long id) throws GeneralException;
 
     InputStream exportJson() throws IOException, GeneralException;
 

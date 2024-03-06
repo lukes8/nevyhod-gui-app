@@ -36,4 +36,8 @@ public class User {
     @OneToMany(targetEntity=UserRole.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "email", referencedColumnName = "email")
     private List<UserRole> roles = new ArrayList<>();
+
+    @OneToMany(targetEntity=Item.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "email", referencedColumnName = "email")
+    private List<Item> items = new ArrayList<>();
 }

@@ -2,6 +2,9 @@ package com.lukepeace.projects.common.security;
 
 public final class Permission {
 
+    public final static String ROLE_USER = "ROLE_USER";
+    public final static String ROLE_ADMIN = "ROLE_ADMIN";
+
     public final static String USER = "hasRole('ROLE_USER')";
     public final static String ADMIN = "hasRole('ROLE_ADMIN')";
     public final static String USER_MAINTENANCE = "hasRole('ROLE_USER_MAINTENANCE')";
