@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 @Component @Slf4j
 public class MapperUtil {
-    public List<UserDetailsRoleVO> getUserDetailsRoles(List<UserRoleVO> roles) {
+    public List<UserDetailsRoleVO> mapListUserRole2ListUserDetailsRole(List<UserRoleVO> roles) {
         return roles.stream().map(o -> UserDetailsRoleVO.builder().name(o.getId().getName()).build()).collect(Collectors.toList());
     }
 }

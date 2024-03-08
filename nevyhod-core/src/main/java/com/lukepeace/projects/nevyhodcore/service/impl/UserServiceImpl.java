@@ -86,8 +86,8 @@ public class UserServiceImpl<E,
     }
 
     private void validateAndProcessRoles(UserVO user) {
-        if (user.getRoles() == null || user.getRoles().isEmpty()) {
-            user.setRoles(new ArrayList<>());
+        user.setRoles(new ArrayList<>(user.getRoles()));
+        if (user.getRoles().stream().anyMatch(o -> !o.getId().getName().equalsIgnoreCase(Permission.ROLE_USER))) {
             user.getRoles().add(UserRoleVO.builder().id(UserRolePkVO.builder().name(Permission.ROLE_USER).build()).build());
         }
         user.getRoles().forEach(o -> o.getId().setEmail(user.getEmail()));

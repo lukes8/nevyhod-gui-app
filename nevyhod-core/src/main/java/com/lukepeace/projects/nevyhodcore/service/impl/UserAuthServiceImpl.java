@@ -42,7 +42,7 @@ public class UserAuthServiceImpl
         Authentication authenticationRequest = UsernamePasswordAuthenticationToken.unauthenticated(userLogin.getEmail(), userLogin.getPassword());
         Authentication authenticationResponse = this.authenticationManager.authenticate(authenticationRequest);
         UserVO userVO = super.findById(userLogin.getEmail());
-        UserDetailVO userDetailVO = UserDetailVO.builder().username(userVO.getEmail()).password(userVO.getPassword()).roles(mapperUtil.getUserDetailsRoles(userVO.getRoles())).isEnabled(userVO.getEnabled()).lastLogin(userVO.getLastLoginDate()).build();
+        UserDetailVO userDetailVO = UserDetailVO.builder().username(userVO.getEmail()).password(userVO.getPassword()).roles(mapperUtil.mapListUserRole2ListUserDetailsRole(userVO.getRoles())).isEnabled(userVO.getEnabled()).lastLogin(userVO.getLastLoginDate()).build();
         return userDetailVO;
     }
 

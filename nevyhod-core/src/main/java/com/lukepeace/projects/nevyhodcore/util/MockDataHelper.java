@@ -1,5 +1,6 @@
 package com.lukepeace.projects.nevyhodcore.util;
 
+import com.lukepeace.projects.common.security.Permission;
 import com.lukepeace.projects.nevyhodcore.vo.ItemVO;
 import com.lukepeace.projects.nevyhodcore.vo.UserRoleVO;
 import com.lukepeace.projects.nevyhodcore.vo.UserVO;
@@ -14,9 +15,10 @@ public class MockDataHelper {
 
         List<UserVO> lst = Arrays.asList(
                 UserVO.builder().email("luke").password("luke").createdDate(LocalDateTime.now()).name("luke").enabled(true)
-                        .roles(Arrays.asList(UserRoleVO.builder().id(UserRolePkVO.builder().email("luke").name("ROLE_ADMIN").build()).build()) ).build(),
-                UserVO.builder().email("tim").password("tim").createdDate(LocalDateTime.now()).name("tim").enabled(true).build()
-        );
+                        .roles(Arrays.asList(UserRoleVO.builder().id(UserRolePkVO.builder().email("luke").name(Permission.ROLE_ADMIN).build()).build()) ).build(),
+                UserVO.builder().email("tim").password("tim").createdDate(LocalDateTime.now()).name("tim").enabled(true)
+                        .roles(Arrays.asList(UserRoleVO.builder().id(UserRolePkVO.builder().email("tim").name(Permission.ROLE_TEST).build()).build()) ).build()
+                );
         return lst;
     }
 

@@ -16,9 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -28,18 +27,10 @@ import java.util.stream.Collectors;
 @Slf4j
 @EnableMethodSecurity
 public class WebSecurityConfig {
-
-    @Value("${test.user.username:luke}")
-    private String testUser;
-    @Value("${test.user.password:noop}")
-    private String testPassword;
-
     @Autowired
     private Environment environment;
-
     @Autowired
     private GlobalConfiguration globalConfig;
-
     @Bean
     public SecurityFilterChain securityFilterChain(@Value("${spring.security.whitelist}") String[] whitelist, HttpSecurity http) throws Exception {
 
@@ -87,18 +78,13 @@ public class WebSecurityConfig {
         return firewall;
     }
     @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        // TODO check
-        CorsConfiguration configuration = new CorsConfiguration();
-        if (this.globalConfig.getIsDev()) {
-            configuration.setAllowedOrigins(Arrays.asList("*"));
-        } else {
-            configuration.setAllowedOrigins(Arrays.asList("localhost:8080"));
-        }
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/rest/api/*").allowedOrigins("http://localhost:8888");
+            }
+        };
     }
     @Bean
     public PasswordEncoder bcryptEncoder() {
