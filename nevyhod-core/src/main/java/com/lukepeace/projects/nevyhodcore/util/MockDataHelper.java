@@ -13,9 +13,9 @@ public class MockDataHelper {
     public static List<UserVO> dummyList4User() {
 
         List<UserVO> lst = Arrays.asList(
-                UserVO.builder().email("luke").createdDate(LocalDateTime.now()).name("luke").enabled(true)
+                UserVO.builder().email("luke").password("luke").createdDate(LocalDateTime.now()).name("luke").enabled(true)
                         .roles(Arrays.asList(UserRoleVO.builder().id(UserRolePkVO.builder().email("luke").name("ROLE_ADMIN").build()).build()) ).build(),
-                UserVO.builder().email("tim@green.com").createdDate(LocalDateTime.now()).name("tim").enabled(true).build()
+                UserVO.builder().email("tim").password("tim").createdDate(LocalDateTime.now()).name("tim").enabled(true).build()
         );
         return lst;
     }

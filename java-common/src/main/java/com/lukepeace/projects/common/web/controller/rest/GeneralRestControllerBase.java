@@ -9,34 +9,37 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-@ControllerAdvice @Slf4j
+@ControllerAdvice
+@Slf4j
 public class GeneralRestControllerBase extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     @ResponseBody
-    public ResponseEntity<ClientErrorMessage> handleException(Exception e, HttpServletRequest request){
+    public ResponseEntity<ClientErrorMessage> handleException(Exception e, HttpServletRequest request) {
 
         String code = "unknown_code", msg = "unknown_message";
         if (e instanceof GeneralException) {
             code = ((GeneralException) e).getExceptionCode().toString();
-            msg = ((GeneralException) e).getExceptionMessage();
-        }
-        else if (e instanceof BadCredentialsException) {
+            msg = ((GeneralException) e).getMessage();
+        } else if (e instanceof BadCredentialsException || e instanceof InternalAuthenticationServiceException) {
             code = NevyhodExceptionCodes.BAD_CREDENTIALS.toString();
             msg = e.getMessage();
-        }
-        else if (e instanceof ConstraintViolationException) {
+        } else if (e instanceof ConstraintViolationException) {
             code = NevyhodExceptionCodes.CONSTRAINT_VIOLATION.toString();
             msg = e.getMessage();
-        }
-        else if (e instanceof InvalidDataAccessApiUsageException) {
+        } else if (e instanceof InvalidDataAccessApiUsageException) {
             code = NevyhodExceptionCodes.INVALID_DATA_ACCESS_API_USAGE.toString();
+            msg = e.getMessage();
+        } else if (e instanceof AccessDeniedException) {
+            code = NevyhodExceptionCodes.ACCESS_DENIED.toString();
             msg = e.getMessage();
         }
 

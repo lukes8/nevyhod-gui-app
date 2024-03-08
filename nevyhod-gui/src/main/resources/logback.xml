@@ -13,7 +13,7 @@
 <!--    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />-->
 
     <logger name="org.springframework.web" level="DEBUG"/>
-<!--    <logger name="com.lukepeace.projects.nevyhodcore.service" level="debug" />-->
+    <logger name="com.lukepeace.projects.nevyhodcore.service" level="debug" />
 
     <root level="INFO">
         <appender-ref ref="CONSOLE" />

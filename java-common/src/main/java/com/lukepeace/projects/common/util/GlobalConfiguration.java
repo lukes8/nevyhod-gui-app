@@ -17,11 +17,11 @@ public class GlobalConfiguration {
     @NotNull
     @Value("${configuration.profile:DEV_PROFILE}")
     private String profileName;
-
     @NotNull
-    @Value("${test.user.username}")
+    @Value("${test.user.username:luke}")
     private String testUser;
-
+    @Value("${test.user.password:noop}")
+    private String testPassword;
     public final String DEV_PROFILE = "DEV_PROFILE";
     @Autowired
     private Environment environment;

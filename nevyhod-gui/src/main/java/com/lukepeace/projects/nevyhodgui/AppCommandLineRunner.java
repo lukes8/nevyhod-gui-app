@@ -2,9 +2,6 @@ package com.lukepeace.projects.nevyhodgui;
 
 import com.lukepeace.projects.common.exceptions.GeneralException;
 import com.lukepeace.projects.common.util.GlobalConfiguration;
-import com.lukepeace.projects.nevyhodcore.service.UserService;
-import com.lukepeace.projects.nevyhodcore.util.MockDataHelper;
-import com.lukepeace.projects.nevyhodcore.vo.UserVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -15,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class AppCommandLineRunner implements CommandLineRunner {
 
 //    @Autowired private BuildProperties buildProperties;
-    @Autowired private UserService userService;
+//    @Autowired private UserService userService;
     @Autowired private GlobalConfiguration globalConfiguration;
 
     @Override
@@ -38,8 +35,8 @@ public class AppCommandLineRunner implements CommandLineRunner {
 //        for (UserRoleVO obj : MockDataHelper.dummyList4UserRole()) {
 //            log.info("created " + userRoleService.create(obj).toString());
 //        }
-        for (UserVO obj : MockDataHelper.dummyList4User()) {
-            log.info("created " + userService.create(obj).toString());
-        }
+//        for (UserVO obj : MockDataHelper.dummyList4User()) {
+//            log.info("created " + userService.create(obj).toString());
+//        }
     }
 }

@@ -2,10 +2,14 @@ package com.lukepeace.projects.nevyhodcore.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lukepeace.projects.common.exceptions.GeneralException;
+import com.lukepeace.projects.common.exceptions.GeneralExceptionCodes;
 import com.lukepeace.projects.common.exceptions.NevyhodExceptionCodes;
 import com.lukepeace.projects.common.util.PagingSortingFilter;
 import com.lukepeace.projects.common.util.ValidationUtilHelper;
 import com.lukepeace.projects.nevyhodcore.criteria.ICriteria;
+import com.lukepeace.projects.nevyhodcore.entity.Order;
+import com.lukepeace.projects.nevyhodcore.entity.User;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -23,7 +27,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Slf4j
 public abstract class AbstractServiceImpl<
         E,
         VO,
@@ -83,6 +87,23 @@ public abstract class AbstractServiceImpl<
         R repo = getRepository();
         repo.deleteById(id);
     }
+    public void validate(ID id) throws GeneralException {
+        R repo = getRepository();
+        if (!repo.existsById(id)) {
+            throw validationUtilHelper.buildGeneralException(populateExceptionCode4NotFound());
+        }
+    }
+    private GeneralExceptionCodes populateExceptionCode4NotFound() {
+        Type t = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[PARAM_TYPE_IDX_ENTITY];
+        log.debug("populateExceptionCode: " + t != null ? t.getTypeName() : "nothing");
+        if (User.class.getTypeName().equalsIgnoreCase(t.getTypeName())) {
+            return NevyhodExceptionCodes.USER_NOT_FOUND;
+        }
+        else if (Order.class.getTypeName().equalsIgnoreCase(t.getTypeName())) {
+            return NevyhodExceptionCodes.ORDER_NOT_FOUND;
+        }
+        return NevyhodExceptionCodes.ITEM_NOT_FOUND;
+    }
 
     public void validateBeforeCreate(ID id) throws GeneralException {
         R repo = getRepository();
@@ -94,7 +115,7 @@ public abstract class AbstractServiceImpl<
     public void validateBeforeDelete(ID id) throws GeneralException {
         R repo = getRepository();
         if (!repo.existsById(id)) {
-            throw validationUtilHelper.buildGeneralException(NevyhodExceptionCodes.ITEMS_NOT_FOUND);
+            throw validationUtilHelper.buildGeneralException(NevyhodExceptionCodes.ITEM_NOT_FOUND);
         }
     }
 
@@ -128,7 +149,7 @@ public abstract class AbstractServiceImpl<
         }));
         R repo = (R) appContext.getBean(beanNames[0]);
         if (repo.count() == 0) {
-            throw validationUtilHelper.buildGeneralException(NevyhodExceptionCodes.ITEMS_NOT_FOUND);
+            throw validationUtilHelper.buildGeneralException(NevyhodExceptionCodes.ITEM_NOT_FOUND);
         }
 
     }

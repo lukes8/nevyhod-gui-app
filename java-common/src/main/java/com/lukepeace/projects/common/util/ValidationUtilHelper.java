@@ -2,17 +2,13 @@ package com.lukepeace.projects.common.util;
 
 import com.lukepeace.projects.common.exceptions.GeneralException;
 import com.lukepeace.projects.common.exceptions.GeneralExceptionCodes;
-import com.lukepeace.projects.common.exceptions.NevyhodExceptionCodes;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.List;
 
 @Component @Slf4j @Validated
@@ -23,7 +19,7 @@ public class ValidationUtilHelper<E> {
     public GeneralException buildGeneralException(GeneralExceptionCodes code) {
         String msg = messageWrapper.getMessage(code.toString());
         GeneralException ex = new GeneralException(code, msg);
-        log.info(ex.getExceptionMessage());
+        log.debug(ex.getMessage());
         return ex;
 
     }

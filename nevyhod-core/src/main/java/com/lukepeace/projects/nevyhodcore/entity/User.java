@@ -1,6 +1,7 @@
 package com.lukepeace.projects.nevyhodcore.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -32,12 +33,14 @@ public class User {
     private LocalDateTime lastUpdatedDate;
     @Column(name = "LAST_LOGIN_DATE")
     private LocalDateTime lastLoginDate;
-
-    @OneToMany(targetEntity=UserRole.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @NotBlank
+    @Column(name = "PASSWORD")
+    private String password;
+    @OneToMany(targetEntity=UserRole.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "email", referencedColumnName = "email")
     private List<UserRole> roles = new ArrayList<>();
 
-    @OneToMany(targetEntity=Item.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(targetEntity=Item.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "email", referencedColumnName = "email")
     private List<Item> items = new ArrayList<>();
 }

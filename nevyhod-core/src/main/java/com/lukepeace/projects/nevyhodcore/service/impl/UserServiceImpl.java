@@ -2,8 +2,10 @@ package com.lukepeace.projects.nevyhodcore.service.impl;
 
 import com.lukepeace.projects.common.exceptions.GeneralException;
 import com.lukepeace.projects.common.security.Permission;
-import com.lukepeace.projects.common.vo.UserLoginVO;
+import com.lukepeace.projects.common.util.PagingSortingFilter;
+import com.lukepeace.projects.common.util.ValidationUtilHelper;
 import com.lukepeace.projects.common.vo.UserRegisterVO;
+import com.lukepeace.projects.nevyhodcore.criteria.ICriteria;
 import com.lukepeace.projects.nevyhodcore.criteria.UserCriteria;
 import com.lukepeace.projects.nevyhodcore.entity.User;
 import com.lukepeace.projects.nevyhodcore.entity.UserRole;
@@ -12,15 +14,14 @@ import com.lukepeace.projects.nevyhodcore.repository.UserRoleRepository;
 import com.lukepeace.projects.nevyhodcore.service.AbstractServiceImpl;
 import com.lukepeace.projects.nevyhodcore.service.UserService;
 import com.lukepeace.projects.nevyhodcore.util.UserFilter;
-import com.lukepeace.projects.nevyhodcore.vo.ItemVO;
 import com.lukepeace.projects.nevyhodcore.vo.UserRoleVO;
 import com.lukepeace.projects.nevyhodcore.vo.UserVO;
 import com.lukepeace.projects.nevyhodcore.vo.pk.UserRolePkVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,16 +29,26 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Qualifier("userService")
 @Slf4j
-public class UserServiceImpl extends
-        AbstractServiceImpl<User, UserVO, UserRepository, String, UserFilter, UserCriteria>
-    implements UserService {
+public class UserServiceImpl<E,
+        VO,
+        R extends JpaRepository & QuerydslPredicateExecutor,
+        ID,
+        F extends PagingSortingFilter,
+        CR extends ICriteria>
+        extends AbstractServiceImpl<User, UserVO, UserRepository, String, UserFilter, UserCriteria>
+        implements UserService {
 
     @Autowired
     private UserRepository repository;
-    @Autowired private UserRoleRepository userRoleRepository;
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private UserRoleRepository userRoleRepository;
+    //    @Autowired
+//    private SecurityMonitoringService securityMonitoringService;
+    @Autowired
+    private ValidationUtilHelper<UserRegisterVO> validationHelper4UserRegisterVO;
+
     @Override
     public List<UserVO> findAll() throws GeneralException {
 
@@ -49,26 +60,16 @@ public class UserServiceImpl extends
     }
 
     @Override
-    public ItemVO findById(Long id) {
-        return null;
-    }
-
-    @Override
-    public UserLoginVO login(UserLoginVO userLogin) {
-        Authentication authenticationRequest = UsernamePasswordAuthenticationToken.unauthenticated(userLogin.getEmail(), userLogin.getPassword());
-        Authentication authenticationResponse = this.authenticationManager.authenticate(authenticationRequest);
-        return userLogin;
-    }
-
-    @Override
-    public UserRegisterVO register(UserRegisterVO userRegister) {
-        //TODO simple validate, save
-        return userRegister;
+    public UserVO findById(String email) throws GeneralException {
+        super.validate(email);
+        User byId = repository.findById(email).get();
+        UserVO userVO = super.map2VO(byId);
+        return userVO;
     }
 
     @Override
     public UserVO create(UserVO user) throws GeneralException {
-        validateAndProcessVO(user);
+        validateAndProcessRoles(user);
 
         UserVO obj = super.create(user, user.getEmail());
         saveRoles(obj.getRoles());
@@ -79,10 +80,12 @@ public class UserServiceImpl extends
         List<UserRole> lst = roles.stream().map(o -> getModelMapper().map(o, UserRole.class)).collect(Collectors.toList());
         log.debug("green lst");
         lst.forEach(o -> log.debug(o.toString()));
-        userRoleRepository.saveAll(lst);
+        if (lst.size() != 0) {
+            userRoleRepository.saveAll(lst);
+        }
     }
 
-    private void validateAndProcessVO(UserVO user) {
+    private void validateAndProcessRoles(UserVO user) {
         if (user.getRoles() == null || user.getRoles().isEmpty()) {
             user.setRoles(new ArrayList<>());
             user.getRoles().add(UserRoleVO.builder().id(UserRolePkVO.builder().name(Permission.ROLE_USER).build()).build());

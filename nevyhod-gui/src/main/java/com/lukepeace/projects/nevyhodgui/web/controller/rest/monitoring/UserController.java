@@ -5,9 +5,11 @@ import com.lukepeace.projects.common.annotations.CustomPageableAsQueryParam;
 import com.lukepeace.projects.common.exceptions.GeneralException;
 import com.lukepeace.projects.common.security.Permission;
 import com.lukepeace.projects.common.security.SecurityContextHolderProvider;
+import com.lukepeace.projects.common.vo.UserDetailVO;
 import com.lukepeace.projects.common.vo.UserLoginVO;
 import com.lukepeace.projects.common.vo.UserRegisterVO;
 import com.lukepeace.projects.nevyhodcore.entity.UserRole;
+import com.lukepeace.projects.nevyhodcore.service.UserAuthService;
 import com.lukepeace.projects.nevyhodcore.service.UserRoleService;
 import com.lukepeace.projects.nevyhodcore.service.UserService;
 import com.lukepeace.projects.nevyhodcore.util.AuditInfoHelper;
@@ -22,12 +24,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -45,18 +47,21 @@ public class UserController {
     @Autowired
     private SecurityContextHolderProvider securityContextHolderProvider;
     @Autowired
-    private UserService userService;
-    @Autowired
     private UserRoleService userRoleService;
+    private UserService userService;
+    private UserAuthService userAuthService;
     @Autowired
-    private AuthenticationManager authenticationManager;
+    public UserController(@Qualifier("userService") UserService userService, @Qualifier("userAuthService") UserAuthService userAuthService) {
+        this.userService = userService;
+        this.userAuthService = userAuthService;
+    }
     @PostMapping("/login")
-    public UserLoginVO login(@RequestBody UserLoginVO userLogin) {
-        return userService.login(userLogin);
+    public UserDetailVO login(@RequestBody UserLoginVO userLogin) throws GeneralException {
+        return userAuthService.login(userLogin);
     }
     @PostMapping("/register")
-    public UserRegisterVO register(@RequestBody UserRegisterVO userRegister) {
-        return userService.register(userRegister);
+    public UserRegisterVO register(@RequestBody UserRegisterVO userRegister) throws GeneralException {
+        return userAuthService.register(userRegister);
     }
     @GetMapping("/login-info")
     public String loginInfo(HttpServletRequest request, HttpServletResponse response) {

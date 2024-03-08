@@ -8,7 +8,9 @@ import lombok.Getter;
  */
 @AllArgsConstructor @Getter
 public class GeneralException extends Exception {
-
     private GeneralExceptionCodes exceptionCode;
-    private String exceptionMessage;
+    public GeneralException(GeneralExceptionCodes exceptionCode, String message) {
+        super(message);
+        this.exceptionCode = exceptionCode;
+    }
 }
