@@ -1,0 +1,84 @@
+button {
+    /* Frame 4 */
+
+    /* Auto layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: .5rem;
+    border-radius: 3rem;
+    border: 1px solid rgba(0, 0, 0, 0.466);
+    padding: .7rem 1.2rem;
+    font-size: .9rem;
+    min-width: 120px;
+    /* transition: all ease-in .07s; */
+}
+
+button:hover {
+    background-color: rgba(0, 0, 0, 0.096);
+    cursor: pointer;
+}
+
+.btn-heart {
+    border-radius: 50% !important;
+    border: none;
+    /* padding: .7rem .7rem !important; */
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(25px);
+    min-width: auto !important;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+}
+
+.btn-heart:hover path {
+    stroke: black;
+}
+.btn-heart svg {
+    /* width: 1rem;
+    height: 1rem; */
+}
+
+.btn-buy {
+    background-color: black;
+    color: white;
+}
+
+.btn-buy:hover {
+    color: black;
+    stroke: black;
+}
+
+.btn-buy path {
+    stroke: white;
+}
+.btn-buy:hover path {
+    stroke: black;
+}
+.btn-add:hover {
+    color: white;
+    background-color: black;
+}
+.btn-add:hover path {
+    stroke: white;
+}
+.btn-star {
+    border: none;
+    padding: .2rem .7rem;
+    min-width: 6rem;
+    height: 3rem;
+}
+
+svg {
+    width: 20px;
+    height: 20px;
+}
+div {
+
+    /* line-height: 30px; */
+
+}
+.bgcolor-tyrkys {
+    background-color: #4DE1C1 !important;
+}
