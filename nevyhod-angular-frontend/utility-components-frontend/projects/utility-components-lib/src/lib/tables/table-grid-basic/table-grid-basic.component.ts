@@ -22,20 +22,20 @@ export class TableGridBasicComponent {
   // themeClass: string = "ag-theme-quartz-dark";
 
   columnDefs: ColDef[] = [
-    { field: 'name' },
-    { field: 'medals.gold', headerName: 'Gold' },
-    { field: 'person.age' },
+    { field: 'name', minWidth: 150 },
+    { field: 'medals.gold', headerName: 'Gold', minWidth: 150 },
+    { field: 'person.age', minWidth: 150 },
   ];
 
   columnDefs2: ColDef[] = [
     // using default ColDef
-    { field: 'athlete' },
-    { field: 'sport' },
+    { field: 'athlete', minWidth: 150 },
+    { field: 'sport', minWidth: 150 },
     // using number column type
-    { field: 'age', type: 'numberColumn' },
-    { field: 'year', type: 'numberColumn' },
+    { field: 'age', type: 'numberColumn', minWidth: 150 },
+    { field: 'year', type: 'numberColumn', minWidth: 150 },
     // using date and non-editable column types
-    { field: 'date', type: ['dateColumn', 'nonEditableColumn'], width: 220 },
+    { field: 'date', type: ['dateColumn', 'nonEditableColumn'], minWidth: 150 },
   ];
 
   public columnTypes: {

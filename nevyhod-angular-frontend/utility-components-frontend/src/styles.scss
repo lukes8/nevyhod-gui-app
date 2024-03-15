@@ -10,10 +10,46 @@
 
 body {
     font-family: 'Muli', sans-serif;
+    font-size: 1rem;
     color: rgba(0, 0, 0, 0.8);
     font-weight: 400;
     line-height: 1.58;
     letter-spacing: -.003em;
-    font-size: 20px;
     padding: 70px;
+}
+
+.ag-floating-filter {
+    color: black;
+}
+
+.ag-theme-quartz,
+.ag-theme-quartz-dark {
+    --ag-header-height: 50px;
+    --ag-header-foreground-color: white;
+    --ag-header-background-color: #565abb;
+    --ag-header-cell-hover-background-color: rgb(80, 40, 140);
+    --ag-header-cell-moving-background-color: rgb(80, 40, 140);
+}
+
+.ag-theme-quartz .ag-header,
+.ag-theme-quartz-dark .ag-header {
+    //   font-family: cursive;
+}
+
+.ag-theme-quartz .ag-header-group-cell,
+.ag-theme-quartz-dark .ag-header-group-cell {
+    font-weight: normal;
+    font-size: 1rem;
+    font-family: 'Muli', sans-serif;
+
+}
+
+.ag-theme-quartz .ag-header-cell,
+.ag-theme-quartz-dark .ag-header-cell {
+    font-size: 1rem;
+}
+
+.ag-theme-custom {
+    --ag-odd-row-background-color: #f1f1f1;
+
 }
