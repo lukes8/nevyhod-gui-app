@@ -47,7 +47,8 @@ public class WebSecurityConfig {
                                             "/rest/api/user/login",
                                             "/rest/api/user/register",
                                             "/rest/api/test", "h2-console/**",
-                                            "resources/**")
+                                            "resources/**",
+                                            "/rest/api/firebase/**")
                                     .permitAll()
 //                            .requestMatchers(whitelist).permitAll()
                                     .anyRequest().authenticated()

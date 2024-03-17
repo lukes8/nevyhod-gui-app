@@ -5,10 +5,12 @@ import com.lukepeace.projects.nevyhodcore.vo.ItemVO;
 import com.lukepeace.projects.nevyhodcore.vo.UserRoleVO;
 import com.lukepeace.projects.nevyhodcore.vo.UserVO;
 import com.lukepeace.projects.nevyhodcore.vo.pk.UserRolePkVO;
+import org.modelmapper.ModelMapper;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MockDataHelper {
     public static List<UserVO> dummyList4User() {
@@ -31,15 +33,21 @@ public class MockDataHelper {
 
     public static List<ItemVO> dummyList4Item(String email) {
 
+        long id = 0;
         List<ItemVO> lst = Arrays.asList(
-                ItemVO.builder().email(email).title("Kosa").price(100.0).createdDate(LocalDateTime.now()).category("Zahrada").amount(2).build(),
-                ItemVO.builder().email(email).title("Kopriva caj").price(100.0).createdDate(LocalDateTime.now()).category("Potraviny").amount(2).build(),
-                ItemVO.builder().email(email).title("Nesmeky").price(100.0).createdDate(LocalDateTime.now()).category("Turistika").amount(2).build(),
-                ItemVO.builder().email(email).title("Banany").price(100.0).createdDate(LocalDateTime.now()).category("Potraviny").amount(2).build(),
-                ItemVO.builder().email(email).title("Jablka").price(100.0).createdDate(LocalDateTime.now()).category("Potraviny").amount(2).build(),
-                ItemVO.builder().email(email).title("Karty").price(100.0).createdDate(LocalDateTime.now()).category("Hry").amount(2).build()
-
+                ItemVO.builder().id(id++).email(email).title("Kosa").price(100.0).createdDate(LocalDateTime.now()).category("Zahrada").amount(2).build(),
+                ItemVO.builder().id(id++).email(email).title("Kopriva caj").price(100.0).createdDate(LocalDateTime.now()).category("Potraviny").amount(2).build(),
+                ItemVO.builder().id(id++).email(email).title("Nesmeky").price(100.0).createdDate(LocalDateTime.now()).category("Turistika").amount(2).build(),
+                ItemVO.builder().id(id++).email(email).title("Banany").price(100.0).createdDate(LocalDateTime.now()).category("Potraviny").amount(2).build(),
+                ItemVO.builder().id(id++).email(email).title("Jablka").price(100.0).createdDate(LocalDateTime.now()).category("Potraviny").amount(2).build(),
+                ItemVO.builder().id(id++).email(email).title("Karty").price(100.0).createdDate(LocalDateTime.now()).category("Hry").amount(2).build()
         );
+        return lst;
+    }
+
+    public static List<com.lukepeace.projects.nevyhodcore.vo.firebase.ItemVO> dummyList4Item4Firebase(String email) {
+        ModelMapper mapper = new ModelMapper();
+        List<com.lukepeace.projects.nevyhodcore.vo.firebase.ItemVO> lst = dummyList4Item(email).stream().map(o -> mapper.map(o, com.lukepeace.projects.nevyhodcore.vo.firebase.ItemVO.class)).collect(Collectors.toList());
         return lst;
     }
 

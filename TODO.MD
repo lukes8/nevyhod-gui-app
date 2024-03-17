@@ -41,9 +41,16 @@ Angular
 
 Tests, e2e tests, integration tests, mockito
 
-NoSQL database (firebase)
+NoSQL database 
+- firestore GCP
+- mongoDB
+
+RDBMS databases
+- oracle
+- postgresql
 
 AWS 
 - services, amplify 
 
+Java 17 features
 

@@ -11,3 +11,14 @@ http://localhost:8080/h2-console/
 - https://www.appsdeveloperblog.com/document-spring-rest-api-with-openapi-3swagger/
 - https://plugins.gradle.org/plugin/io.swagger.core.v3.swagger-gradle-plugin
 - https://stackoverflow.com/questions/49654143/spring-security-5-there-is-no-passwordencoder-mapped-for-the-id-null
+
+
+### Databases, NoSQL firebase, h2
+```
+Realtime database
+https://console.firebase.google.com/project/nevyhod-app/firestore
+
+API URL
+https://nevyhod-app-default-rtdb.firebaseio.com/
+
+```

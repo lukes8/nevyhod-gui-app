@@ -28,6 +28,7 @@ dependencies {
     implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
     implementation 'org.springframework.boot:spring-boot-starter-security'
 
+    implementation 'com.google.firebase:firebase-admin:9.0.0'
 
     annotationProcessor libraries.commons.querydsl.apt
     annotationProcessor("jakarta.persistence:jakarta.persistence-api")

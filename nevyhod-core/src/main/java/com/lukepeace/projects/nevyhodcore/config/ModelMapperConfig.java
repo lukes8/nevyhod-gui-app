@@ -12,6 +12,9 @@ import org.modelmapper.spi.MappingContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.sql.Date;
+import java.time.ZoneId;
+
 @Configuration
 public class ModelMapperConfig {
     @Bean
@@ -74,6 +77,20 @@ public class ModelMapperConfig {
                 return null;
             }
         };
+        Converter<ItemVO, com.lukepeace.projects.nevyhodcore.vo.firebase.ItemVO> converter4FirebaseFromVO2VO = new Converter<ItemVO, com.lukepeace.projects.nevyhodcore.vo.firebase.ItemVO>() {
+            @Override
+            public com.lukepeace.projects.nevyhodcore.vo.firebase.ItemVO convert(MappingContext<ItemVO, com.lukepeace.projects.nevyhodcore.vo.firebase.ItemVO> context) {
+                if (context != null) {
+                    ItemVO source = context.getSource();
+                    com.lukepeace.projects.nevyhodcore.vo.firebase.ItemVO destination = context.getDestination();
+                    if (source.getCreatedDate() != null) {
+                        destination.setCreatedDate(Date.from(source.getCreatedDate().atZone(ZoneId.systemDefault()).toInstant()));
+                    }
+                }
+                return context.getDestination();
+            }
+        };
+
 
         modelMapper.createTypeMap(ItemVO.class, Item.class).setPostConverter(converterVO2Entity).addMappings(mapper -> mapper.skip(Item::setEnabled));
         modelMapper.createTypeMap(Item.class, ItemVO.class).setPostConverter(converterEntity2VO).addMappings(mapper -> mapper.skip(ItemVO::setDisabled));
