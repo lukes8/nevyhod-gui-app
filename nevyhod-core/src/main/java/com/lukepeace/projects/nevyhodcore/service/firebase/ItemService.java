@@ -1,7 +1,7 @@
 package com.lukepeace.projects.nevyhodcore.service.firebase;
 
 import com.lukepeace.projects.common.exceptions.GeneralException;
-import com.lukepeace.projects.nevyhodcore.vo.ItemVO;
+import com.lukepeace.projects.nevyhodcore.vo.firebase.ItemVO;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,13 +12,13 @@ import java.util.function.Consumer;
 
 public interface ItemService {
 
-    List<ItemVO> findAll() throws GeneralException;
+    List<ItemVO> findAll() throws GeneralException, ExecutionException, InterruptedException;
 
 //    Page<ItemVO> findAll(ItemFilter filter);
 
-    ItemVO findById(Long id);
+    ItemVO findById(Long id) throws ExecutionException, InterruptedException, GeneralException;
 
-//    ItemVO create(ItemVO item) throws GeneralException;
+    ItemVO create(ItemVO item) throws GeneralException, ExecutionException, InterruptedException;
 
     void delete(Long id) throws GeneralException;
 

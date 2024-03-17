@@ -43,7 +43,6 @@ public class ModelMapperConfig {
                 if (context != null) {
                     Item source = context.getSource();
                     ItemVO destination = context.getDestination();
-
                     if (source.getEnabled() != null) {
                         destination.setDisabled(!source.getEnabled());
                     }
@@ -96,6 +95,7 @@ public class ModelMapperConfig {
         modelMapper.createTypeMap(Item.class, ItemVO.class).setPostConverter(converterEntity2VO).addMappings(mapper -> mapper.skip(ItemVO::setDisabled));
         modelMapper.createTypeMap(UserVO.class, UserRegisterVO.class).setConverter(converterUserVO2UserRegisterVO);
         modelMapper.createTypeMap(UserRoleVO.class, UserDetailsRoleVO.class).setConverter(converterUserRoleVO2UserDetailsRoleVO);
+        modelMapper.createTypeMap(ItemVO.class, com.lukepeace.projects.nevyhodcore.vo.firebase.ItemVO.class).setPostConverter(converter4FirebaseFromVO2VO).addMappings(mapper -> mapper.skip(com.lukepeace.projects.nevyhodcore.vo.firebase.ItemVO::setCreatedDate));
 
         return modelMapper;
     }
