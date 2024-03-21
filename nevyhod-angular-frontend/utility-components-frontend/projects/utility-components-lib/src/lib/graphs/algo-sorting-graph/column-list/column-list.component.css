@@ -1,0 +1,9 @@
+.column-list {
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+    padding: 1rem 2rem 0;
+    min-width: 50vw;
+    margin: 0 auto;
+    align-items: flex-end;
+}

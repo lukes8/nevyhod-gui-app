@@ -1,0 +1,15 @@
+<div class="sorting-graph">
+    <lib-column-list [values]="values"></lib-column-list>
+</div>
+<div class="d-flex">
+    <button (click)="reset()">reset</button>
+    <button (click)="sort()">sort</button>
+    <input
+        [(ngModel)]="maxSize"
+        id="ms"
+        type="number"
+        class="text-gray-800 px-2 py-1 rounded-md"
+        value="10"
+        min="0"
+      />
+</div>

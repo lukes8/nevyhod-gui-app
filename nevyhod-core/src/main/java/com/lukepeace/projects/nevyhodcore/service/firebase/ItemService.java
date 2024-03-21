@@ -20,7 +20,7 @@ public interface ItemService {
 
     ItemVO create(ItemVO item) throws GeneralException, ExecutionException, InterruptedException;
 
-    void delete(Long id) throws GeneralException;
+    void delete(Long id) throws GeneralException, ExecutionException, InterruptedException;
 
     InputStream exportJson() throws IOException, GeneralException;
 

@@ -10,3 +10,7 @@ export * from './lib/tables/table-grid-basic/table-grid-basic.component';
 export * from './lib/header/header.component';
 export * from './lib/form-controls/form-button/form-button.component';
 export * from './lib/card-item/card-item.component';
+export * from './lib/card-item-collection/card-item-collection.component';
+export * from './lib/graphs/algo-sorting-graph/algo-sorting-graph.component';
+export * from './lib/factory/item-factory';
+export * from './lib/factory/item-model';

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ItemFactory, ItemVO } from 'utility-components-lib';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'utility-components-frontend';
+
+
+  items: ItemVO[] = ItemFactory.makeDefault4List();
 }

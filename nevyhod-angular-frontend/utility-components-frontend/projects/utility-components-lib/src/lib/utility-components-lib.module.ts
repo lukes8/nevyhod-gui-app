@@ -13,6 +13,10 @@ import { TableGridBasicComponent } from './tables/table-grid-basic/table-grid-ba
 import { FormButtonComponent } from './form-controls/form-button/form-button.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { AlgoSortingGraphComponent } from './graphs/algo-sorting-graph/algo-sorting-graph.component';
+import { ColumnComponent } from './graphs/algo-sorting-graph/column/column.component';
+import { ColumnListComponent } from './graphs/algo-sorting-graph/column-list/column-list.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,15 +31,19 @@ import { HttpClientModule } from '@angular/common/http';
     FormRegisterComponent,
     FormAddComponent,
     FormCartComponent,
-    FormButtonComponent
+    FormButtonComponent,
+    AlgoSortingGraphComponent,
+    ColumnComponent,
+    ColumnListComponent
   ],
-  imports: [ CommonModule, TableGridBasicComponent, HttpClientModule ],
+  imports: [ CommonModule, TableGridBasicComponent, HttpClientModule, FormsModule ],
   exports: [
     UtilityComponentsLibComponent, 
     TableGridBasicComponent, 
     HeaderComponent, 
     FormButtonComponent,
-    CardItemComponent
+    CardItemComponent, CardItemCollectionComponent,
+    AlgoSortingGraphComponent
   ]
 })
 export class UtilityComponentsLibModule { }

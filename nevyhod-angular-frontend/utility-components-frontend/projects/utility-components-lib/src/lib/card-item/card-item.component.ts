@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { ItemVO } from '../factory/item-model';
+import { ItemFactory } from '../factory/item-factory';
 
 @Component({
   selector: 'lib-card-item',
@@ -7,5 +9,5 @@ import { Component, Input } from '@angular/core';
 })
 export class CardItemComponent {
 
-
+  @Input() item: ItemVO = ItemFactory.makeDefault();
 }

@@ -6,6 +6,7 @@ import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import com.lukepeace.projects.common.exceptions.GeneralException;
 import com.lukepeace.projects.common.exceptions.NevyhodExceptionCodes;
+import com.lukepeace.projects.nevyhodcore.service.firebase.AbstractServiceImpl;
 import com.lukepeace.projects.nevyhodcore.service.firebase.ItemService;
 import com.lukepeace.projects.nevyhodcore.util.MockDataHelper;
 import com.lukepeace.projects.nevyhodcore.vo.firebase.ItemVO;
@@ -23,7 +24,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 @Service("itemReportService4Firebase") @Slf4j
-public class ItemServiceImpl implements ItemService {
+public class ItemServiceImpl extends AbstractServiceImpl implements ItemService {
 
     @Autowired private ModelMapper modelMapper;
 
@@ -40,7 +41,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ItemVO findById(Long id) throws ExecutionException, InterruptedException, GeneralException {
         CollectionReference users = FirestoreClient.getFirestore().collection("items");
-        DocumentReference doc = users.document("item-" + id.intValue());
+        DocumentReference doc = users.document("" + id.intValue());
         if (!doc.get().get().exists()) {
             throw new GeneralException(NevyhodExceptionCodes.ITEM_NOT_FOUND, "not found");
         }
@@ -51,7 +52,7 @@ public class ItemServiceImpl implements ItemService {
     private String getNextIdValAsString() throws ExecutionException, InterruptedException {
         CollectionReference users = FirestoreClient.getFirestore().collection("items");
         QuerySnapshot queryDocumentSnapshots = users.get().get();
-        return "item-" + queryDocumentSnapshots.size() + 1;
+        return "" + queryDocumentSnapshots.size() + 1;
     }
 
     private int getNextIdVal() throws ExecutionException, InterruptedException {
@@ -64,15 +65,16 @@ public class ItemServiceImpl implements ItemService {
     public ItemVO create(ItemVO item) throws GeneralException, ExecutionException, InterruptedException {
         Firestore firestore = FirestoreClient.getFirestore();
         item.setId((long) getNextIdVal());
-        ApiFuture<WriteResult> future = firestore.collection("items").document("item-" + item.getId()).set(item);
+        ApiFuture<WriteResult> future = firestore.collection("items").document("" + item.getId()).set(item);
         WriteResult writeResult = future.get();
         log.info("Updated time: {}", writeResult.getUpdateTime());
         return item;
     }
 
     @Override
-    public void delete(Long id) throws GeneralException {
-
+    public void delete(Long id) throws GeneralException, ExecutionException, InterruptedException {
+        WriteResult writeResult = delete("items", id);
+        log.info("Deleted time: {}", writeResult.getUpdateTime());
     }
 
     @Override
@@ -112,7 +114,7 @@ public class ItemServiceImpl implements ItemService {
         List<com.lukepeace.projects.nevyhodcore.vo.ItemVO> lst = MockDataHelper.dummyList4Item("luke");
         List<ItemVO> lstFinal = lst.stream().map(o -> modelMapper.map(o, ItemVO.class)).collect(Collectors.toList());
         lstFinal.forEach(o -> {
-            futures.add(items.document("item-"+o.getId()).set(o));
+            futures.add(items.document(""+o.getId()).set(o));
         });
         List<WriteResult> writeResults = ApiFutures.allAsList(futures).get();
         writeResults.forEach(o -> log.info("Updated time: {}", o.getUpdateTime()));

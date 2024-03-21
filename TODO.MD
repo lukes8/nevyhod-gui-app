@@ -40,6 +40,7 @@ Angular
 - ag grid
 
 Tests, e2e tests, integration tests, mockito
+- selenium, cucumber, junit5
 
 NoSQL database 
 - firestore GCP

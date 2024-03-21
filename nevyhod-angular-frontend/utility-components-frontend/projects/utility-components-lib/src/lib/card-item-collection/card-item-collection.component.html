@@ -1,1 +1,6 @@
-<p>card-item-collection works!</p>
+<div class="item-collection">
+    <ng-container *ngFor="let item of items">
+        <lib-card-item [item]="item"></lib-card-item>
+
+    </ng-container>
+</div>

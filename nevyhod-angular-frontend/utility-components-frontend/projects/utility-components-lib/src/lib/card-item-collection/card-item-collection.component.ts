@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ItemVO } from '../factory/item-model';
+import { ItemFactory } from '../factory/item-factory';
 
 @Component({
   selector: 'lib-card-item-collection',
@@ -7,4 +9,5 @@ import { Component } from '@angular/core';
 })
 export class CardItemCollectionComponent {
 
+  @Input() items: ItemVO[] = [];
 }

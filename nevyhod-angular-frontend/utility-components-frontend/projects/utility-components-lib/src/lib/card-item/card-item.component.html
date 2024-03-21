@@ -1,11 +1,11 @@
 <div class="card">
     <div class="header">
-        <img src="https://hips.hearstapps.com/hmg-prod/images/766/bananas-1512135191.jpg?resize=1200:*" alt="">
+        <img [src]="item.imagePath" [alt]="item.title">
     </div>
     <div class="content">
         <h2>Title</h2>
-        <h4>Subtitle</h4>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        <h4>{{ item.title }}</h4>
+        <p>{{ item.description }}
         </p>
         <div class="d-flex justify-content-end">
             <lib-form-button type="btn-star"></lib-form-button>
