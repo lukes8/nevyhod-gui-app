@@ -1,6 +1,16 @@
 <div class="item-collection">
-    <ng-container *ngFor="let item of items">
+    <!-- <ng-container *ngFor="let item of items">
         <lib-card-item [item]="item"></lib-card-item>
 
+    </ng-container> -->
+
+    <ng-container
+        *ngFor="let item of asyncItems$ | async | paginate: { id: 'server', itemsPerPage: 4, currentPage: page, totalItems: total }">
+        <lib-card-item [item]="item"></lib-card-item>
     </ng-container>
+
+</div>
+<div class="has-text-centered">
+    <div class="spinner" [ngClass]="{ 'hidden': !loading }"></div>
+    <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
 </div>

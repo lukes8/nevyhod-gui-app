@@ -45,6 +45,7 @@ Tests, e2e tests, integration tests, mockito
 NoSQL database 
 - firestore GCP
 - mongoDB
+- nestjs https://nestjs.com/ 
 
 RDBMS databases
 - oracle

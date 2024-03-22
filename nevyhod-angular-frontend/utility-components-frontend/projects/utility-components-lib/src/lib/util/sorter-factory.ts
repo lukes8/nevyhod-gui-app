@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
 
-@Injectable({ providedIn: 'root' })
 abstract class AbstractSortStrategy {
     delay: number = 100;
 
@@ -11,7 +10,6 @@ abstract class AbstractSortStrategy {
     }
 }
 
-@Injectable({ providedIn: 'root' })
 class BubbleSortStrategy extends AbstractSortStrategy {
     sort(array: number[]): number[] {
         console.log('bubble sort');
@@ -34,7 +32,6 @@ class BubbleSortStrategy extends AbstractSortStrategy {
         return array;
     }
 }
-@Injectable({ providedIn: 'root' })
 class SelectionSortStrategy extends AbstractSortStrategy {
     sort(array: number[]): number[] {
         console.log('selection sort');

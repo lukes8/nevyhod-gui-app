@@ -14,3 +14,4 @@ export * from './lib/card-item-collection/card-item-collection.component';
 export * from './lib/graphs/algo-sorting-graph/algo-sorting-graph.component';
 export * from './lib/factory/item-factory';
 export * from './lib/factory/item-model';
+export * from './lib/pagination/pagination.component';

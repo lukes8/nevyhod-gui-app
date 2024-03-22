@@ -1,5 +1,15 @@
 ### How to run
+```
 ./gradlew :nevyhod-gui:bootRun -x test --info
+
+utility-components-frontend
+ng build utility-components-lib --watch
+ng serve
+
+
+```
+
+
 
 ### Useful urls
 http://localhost:8080/swagger-ui/api-docs

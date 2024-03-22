@@ -17,6 +17,8 @@ import { AlgoSortingGraphComponent } from './graphs/algo-sorting-graph/algo-sort
 import { ColumnComponent } from './graphs/algo-sorting-graph/column/column.component';
 import { ColumnListComponent } from './graphs/algo-sorting-graph/column-list/column-list.component';
 import { FormsModule } from '@angular/forms';
+import { PaginationComponent } from './pagination/pagination.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -34,16 +36,19 @@ import { FormsModule } from '@angular/forms';
     FormButtonComponent,
     AlgoSortingGraphComponent,
     ColumnComponent,
-    ColumnListComponent
+    ColumnListComponent,
+    PaginationComponent
   ],
-  imports: [ CommonModule, TableGridBasicComponent, HttpClientModule, FormsModule ],
+  imports: [CommonModule, TableGridBasicComponent, HttpClientModule, FormsModule,
+            NgxPaginationModule],
   exports: [
-    UtilityComponentsLibComponent, 
-    TableGridBasicComponent, 
-    HeaderComponent, 
+    UtilityComponentsLibComponent,
+    TableGridBasicComponent,
+    HeaderComponent,
     FormButtonComponent,
     CardItemComponent, CardItemCollectionComponent,
-    AlgoSortingGraphComponent
+    AlgoSortingGraphComponent,
+    PaginationComponent
   ]
 })
 export class UtilityComponentsLibModule { }
