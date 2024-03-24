@@ -5,7 +5,7 @@
     </ng-container> -->
 
     <ng-container
-        *ngFor="let item of asyncItems$ | async | paginate: { id: 'server', itemsPerPage: 4, currentPage: page, totalItems: total }">
+        *ngFor="let item of subject.getValue().items| paginate: { id: 'server', itemsPerPage: 4, currentPage: subject.getValue().page ,totalItems: subject.getValue().total}">
         <lib-card-item [item]="item"></lib-card-item>
     </ng-container>
 

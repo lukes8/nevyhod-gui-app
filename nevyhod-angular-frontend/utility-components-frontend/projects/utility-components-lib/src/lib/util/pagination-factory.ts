@@ -4,6 +4,7 @@ import { ItemVO } from "../factory/item-model";
 export interface IServerResponse {
     items: ItemVO[];
     total: number;
+    page: number;
 }
 
 export interface IPagination {
@@ -68,7 +69,8 @@ export class PaginationHelper implements IPagination {
 
         return of({
             items: items.slice(start, end),
-            total: items.length
+            total: items.length,
+            page: page
         }).pipe(delay(1000));
     }
 

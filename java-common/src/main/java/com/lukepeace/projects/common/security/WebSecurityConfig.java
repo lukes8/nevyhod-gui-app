@@ -16,8 +16,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -34,19 +35,19 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(@Value("${spring.security.whitelist}") String[] whitelist, HttpSecurity http) throws Exception {
 
-        log.info("whitelist: " + Arrays.stream(whitelist).collect(Collectors.joining()));
+        log.info("whitelist2: " + Arrays.stream(whitelist).collect(Collectors.joining()));
         log.info("green: " + globalConfig.getIsDev() + " " + globalConfig.getProfileName());
 
         if (globalConfig.getIsDev()) {
             http
-                    .cors(Customizer.withDefaults())
+                    .cors(cors -> cors.configurationSource(apiConfigurationSource()))
                     .csrf(csrf -> csrf.disable())
                     .headers(header -> header.frameOptions(f -> f.disable()))//h2-console in frame
                     .authorizeHttpRequests((authorize) -> authorize
                                     .requestMatchers("swagger-ui/**",
                                             "/rest/api/user/login",
                                             "/rest/api/user/register",
-                                            "/rest/api/test", "h2-console/**",
+                                            "/rest/api/test/**", "h2-console/**",
                                             "resources/**",
                                             "/rest/api/firebase/**")
                                     .permitAll()
@@ -78,14 +79,14 @@ public class WebSecurityConfig {
         firewall.setAllowUrlEncodedSlash(true);
         return firewall;
     }
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/rest/api/*").allowedOrigins("http://localhost:8888");
-            }
-        };
+    CorsConfigurationSource apiConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8888", "http://localhost:62878"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
     @Bean
     public PasswordEncoder bcryptEncoder() {

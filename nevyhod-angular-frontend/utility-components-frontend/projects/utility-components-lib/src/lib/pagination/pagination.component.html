@@ -1,10 +1,10 @@
 <ul class="item-list">
-    <li *ngFor="let item of asyncItems$ | async | paginate: { id: 'server2', itemsPerPage: 4, currentPage: page, totalItems: total }">
+    <li *ngFor="let item of subject.getValue().items | paginate: { id: 'server2', itemsPerPage: 4, currentPage: page, totalItems: subject.getValue().total}">
         {{ item.title }}
     </li>
 </ul>
 
 <div class="has-text-centered">
     <div class="spinner" [ngClass]="{ 'hidden': !loading }"></div>
-    <pagination-controls (pageChange)="getPage($event)" id="server2"></pagination-controls>
+    <pagination-controls (pageChange)="getPageNext($event)" id="server2"></pagination-controls>
 </div>

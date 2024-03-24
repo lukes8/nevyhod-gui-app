@@ -1,22 +1,24 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Observable, delay, map, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, delay, map, of, tap } from 'rxjs';
 import { ItemVO } from '../factory/item-model';
-import { PaginationHelper, PaginationHelperFactory } from '../util/pagination-factory';
-
-interface IServerResponse {
-  items: ItemVO[];
-  total: number;
-}
+import { IServerResponse, PaginationHelper, PaginationHelperFactory } from '../util/pagination-factory';
 
 @Component({
   selector: 'lib-pagination',
   templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./pagination.component.css']
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaginationComponent implements OnInit {
   @Input() items: ItemVO[] = [];
   asyncItems$: Observable<ItemVO[]>;
+  subject: BehaviorSubject<IServerResponse> = new BehaviorSubject<IServerResponse>(
+    {
+      items: [],
+      total: 0,
+      page: 0
+    }
+  );
   itemsArray: ItemVO[];
   page: number = 1;
   total: number;
@@ -26,18 +28,25 @@ export class PaginationComponent implements OnInit {
 
   ngOnInit(): void {
     this.paginationHelper = PaginationHelperFactory.makeInstance(this.items, this.page, this.total, this.loading);
-    this.getPage(this.page);
+    this.getPageNext(this.page);
   }
 
   /**
    * Async approach
    * @param page 
    */
-  getPage(page: number) {
+  getPageNext(page: number) {
     this.loading = true;
-    this.asyncItems$ = this.paginationHelper.getPage(page).pipe(tap(r => {
-      this.total = r.total;
+    const res = this.paginationHelper.getPage(page).subscribe(r => {
+      this.subject.next(r);
       this.page = page;
-    }), map(r => r.items));
+    });
+
+  }
+  getPageInit(page: number) {
+    this.loading = true;
+    this.paginationHelper.getPage(page).subscribe(r => {
+      this.subject = new BehaviorSubject(r);
+    });
   }
 }

@@ -38,6 +38,7 @@ Gradle/Groovy
 Angular
 - services, firebase and spring kick off
 - ag grid
+- Subject https://www.learnrxjs.io/learn-rxjs/subjects
 
 Tests, e2e tests, integration tests, mockito
 - selenium, cucumber, junit5
