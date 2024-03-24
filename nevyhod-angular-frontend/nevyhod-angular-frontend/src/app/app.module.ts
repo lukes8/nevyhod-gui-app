@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ItemService } from './nevyhodcore/rest/service/item.service';
+import { UtilityComponentsLibModule } from 'utility-components-lib';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { ItemService } from './nevyhodcore/rest/service/item.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    UtilityComponentsLibModule
   ],
   providers: [
     ItemService

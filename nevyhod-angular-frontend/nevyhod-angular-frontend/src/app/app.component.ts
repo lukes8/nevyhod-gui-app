@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ItemService } from './nevyhodcore/rest/service/item.service';
+import { ItemFactory, ItemVO } from 'utility-components-lib';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +10,15 @@ import { ItemService } from './nevyhodcore/rest/service/item.service';
 })
 export class AppComponent {
   title = 'angular-frontend';
-
+  items: BehaviorSubject<ItemVO[]> = new BehaviorSubject<ItemVO[]>([]);
+  
   constructor(private itemService: ItemService) {
-    itemService.findById(2).subscribe({
+    itemService.findAll4Firebase().subscribe({
       next: r => {
         console.log("received green");
         console.log(r);
+        // this.items.next(ItemFactory.makeDefault4List());
+        this.items.next(r);
       },
       error: e => {
         console.error("received error");

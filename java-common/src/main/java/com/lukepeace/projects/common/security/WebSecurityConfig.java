@@ -81,7 +81,11 @@ public class WebSecurityConfig {
     }
     CorsConfigurationSource apiConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8888", "http://localhost:62878"));
+        if (globalConfig.getIsDev()) {
+            configuration.setAllowedOrigins(Arrays.asList("*"));
+        } else {
+            configuration.setAllowedOrigins(Arrays.asList("http://localhost:8888", "http://localhost:62878"));
+        }
         configuration.setAllowedMethods(Arrays.asList("GET","POST"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

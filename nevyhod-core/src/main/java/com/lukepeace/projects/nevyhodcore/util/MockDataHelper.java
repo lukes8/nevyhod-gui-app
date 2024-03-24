@@ -33,14 +33,13 @@ public class MockDataHelper {
 
     public static List<ItemVO> dummyList4Item(String email) {
 
-        long id = 0;
         List<ItemVO> lst = Arrays.asList(
-                ItemVO.builder().id(id++).email(email).title("Kosa").price(100.0).createdDate(LocalDateTime.now()).category("Zahrada").amount(2).build(),
-                ItemVO.builder().id(id++).email(email).title("Kopriva caj").price(100.0).createdDate(LocalDateTime.now()).category("Potraviny").amount(2).build(),
-                ItemVO.builder().id(id++).email(email).title("Nesmeky").price(100.0).createdDate(LocalDateTime.now()).category("Turistika").amount(2).build(),
-                ItemVO.builder().id(id++).email(email).title("Banany").price(100.0).createdDate(LocalDateTime.now()).category("Potraviny").amount(2).build(),
-                ItemVO.builder().id(id++).email(email).title("Jablka").price(100.0).createdDate(LocalDateTime.now()).category("Potraviny").amount(2).build(),
-                ItemVO.builder().id(id++).email(email).title("Karty").price(100.0).createdDate(LocalDateTime.now()).category("Hry").amount(2).build()
+                ItemVO.builder().email(email).title("Kosa").price(100.0).createdDate(LocalDateTime.now()).category("Zahrada").amount(2).build(),
+                ItemVO.builder().email(email).title("Kopriva caj").price(100.0).createdDate(LocalDateTime.now()).category("Potraviny").amount(2).build(),
+                ItemVO.builder().email(email).title("Nesmeky").price(100.0).createdDate(LocalDateTime.now()).category("Turistika").amount(2).build(),
+                ItemVO.builder().email(email).title("Banany").price(100.0).createdDate(LocalDateTime.now()).category("Potraviny").amount(2).build(),
+                ItemVO.builder().email(email).title("Jablka").price(100.0).createdDate(LocalDateTime.now()).category("Potraviny").amount(2).build(),
+                ItemVO.builder().email(email).title("Karty").price(100.0).createdDate(LocalDateTime.now()).category("Hry").amount(2).build()
         );
         return lst;
     }

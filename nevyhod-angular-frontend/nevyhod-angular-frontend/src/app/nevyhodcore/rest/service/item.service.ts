@@ -19,13 +19,13 @@ export class HttpOptions {
 
     static make4Json(): HttpOptions {
         let opt = new HttpOptions();
-        opt.headers = new HttpHeaders({ 'Content-Type': MediaType.json, 'Accept': MediaType.json });
+        opt.headers = new HttpHeaders({ 'Content-Type': MediaType.json, 'Accept': MediaType.json, 'Authorization': `Basic ${btoa('luke:luke')}` });
         opt.resType = 'json';
         return opt;
     }
     static make4Text(): HttpOptions {
         let opt = new HttpOptions();
-        opt.headers = new HttpHeaders({ 'Content-Type': MediaType.text, 'Accept': MediaType.text });
+        opt.headers = new HttpHeaders({ 'Content-Type': MediaType.text, 'Accept': MediaType.text, 'Authorization': `Basic ${btoa('luke:luke')}` });
         opt.resType = 'text';
         return opt;
     }
@@ -33,7 +33,8 @@ export class HttpOptions {
     get(): any {
         return {
             headers: this.headers,
-            responseType: this.resType
+            responseType: this.resType,
+            
         }
     }
 }
@@ -50,6 +51,11 @@ export class ItemService implements IService {
     }
 
     findAll(): Observable<any> {
+        let suffix = "items";
+        return this.http
+            .get(this.baseUrl + suffix, this.options4Json.get());
+    }
+    findAll4Firebase(): Observable<any> {
         let suffix = "firebase/items";
         return this.http
             .get(this.baseUrl + suffix, this.options4Json.get());

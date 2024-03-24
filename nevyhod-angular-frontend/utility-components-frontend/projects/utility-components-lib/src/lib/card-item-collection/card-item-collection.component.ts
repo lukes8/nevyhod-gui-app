@@ -14,6 +14,7 @@ import { IServerResponse, PaginationHelper, PaginationHelperFactory } from '../u
 export class CardItemCollectionComponent implements OnInit {
 
   @Input() items: ItemVO[] = [];
+  @Input() items2: BehaviorSubject<ItemVO[]>;
   asyncItems$: Observable<ItemVO[]>;
   subject: BehaviorSubject<IServerResponse> = new BehaviorSubject<IServerResponse>(
     {
@@ -32,8 +33,10 @@ export class CardItemCollectionComponent implements OnInit {
   paginationHelper: PaginationHelper;
 
   ngOnInit(): void {
-    this.paginationHelper = PaginationHelperFactory.makeInstance(this.items, this.page, this.total, this.loading);
-    this.getPage(this.page);
+    this.items2.subscribe(r => {
+      this.paginationHelper = PaginationHelperFactory.makeInstance(r, this.page, this.total, this.loading);
+      this.getPage(this.page);
+    })
   }
 
   getPage(page: number) {
