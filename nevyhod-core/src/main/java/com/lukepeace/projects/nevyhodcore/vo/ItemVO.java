@@ -18,4 +18,5 @@ public class ItemVO {
     private Integer amount;
     private Integer status;
     private Boolean disabled;   //special case; for more info see @ModelMapperConfig
+    private String imagePath;
 }

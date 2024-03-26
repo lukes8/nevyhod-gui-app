@@ -33,13 +33,15 @@ public class MockDataHelper {
 
     public static List<ItemVO> dummyList4Item(String email) {
 
+        String jpeg = "https://www.sonnentor.com/global/tips/CZ%20only/Zdrav%C3%AD%20-%20Gesundheit/Kop%C5%99iva%20%E2%80%93%20Urtica%20dioica/image-thumb__41991__img-text-teaser-big-default/hlavni-biobylinky-biocaje-biokopriva-kopriva-louky.jpeg";
+        long id = 1;
         List<ItemVO> lst = Arrays.asList(
-                ItemVO.builder().email(email).title("Kosa").price(100.0).createdDate(LocalDateTime.now()).category("Zahrada").amount(2).build(),
-                ItemVO.builder().email(email).title("Kopriva caj").price(100.0).createdDate(LocalDateTime.now()).category("Potraviny").amount(2).build(),
-                ItemVO.builder().email(email).title("Nesmeky").price(100.0).createdDate(LocalDateTime.now()).category("Turistika").amount(2).build(),
-                ItemVO.builder().email(email).title("Banany").price(100.0).createdDate(LocalDateTime.now()).category("Potraviny").amount(2).build(),
-                ItemVO.builder().email(email).title("Jablka").price(100.0).createdDate(LocalDateTime.now()).category("Potraviny").amount(2).build(),
-                ItemVO.builder().email(email).title("Karty").price(100.0).createdDate(LocalDateTime.now()).category("Hry").amount(2).build()
+                ItemVO.builder().id(id++).imagePath(jpeg).email(email).title("Kosa").price(100.0).createdDate(LocalDateTime.now()).category("Zahrada").amount(2).build(),
+                ItemVO.builder().id(id++).imagePath(jpeg).email(email).title("Kopriva caj").price(100.0).createdDate(LocalDateTime.now()).category("Potraviny").amount(2).build(),
+                ItemVO.builder().id(id++).imagePath(jpeg).email(email).title("Nesmeky").price(100.0).createdDate(LocalDateTime.now()).category("Turistika").amount(2).build(),
+                ItemVO.builder().id(id++).imagePath(jpeg).email(email).title("Banany").price(100.0).createdDate(LocalDateTime.now()).category("Potraviny").amount(2).build(),
+                ItemVO.builder().id(id++).imagePath(jpeg).email(email).title("Jablka").price(100.0).createdDate(LocalDateTime.now()).category("Potraviny").amount(2).build(),
+                ItemVO.builder().id(id).imagePath(jpeg).email(email).title("Karty").price(100.0).createdDate(LocalDateTime.now()).category("Hry").amount(2).build()
         );
         return lst;
     }

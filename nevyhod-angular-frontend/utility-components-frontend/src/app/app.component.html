@@ -14,5 +14,5 @@
 
 
 
-<lib-card-item-collection [items]="items"></lib-card-item-collection>
+<lib-card-item-collection (pageChangedEvent)="onPageChangedEvent($event)" [items2]="items2"></lib-card-item-collection>
 <lib-pagination [items]="items"></lib-pagination>

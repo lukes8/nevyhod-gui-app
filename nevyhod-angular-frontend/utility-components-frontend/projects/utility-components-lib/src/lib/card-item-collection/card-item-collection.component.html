@@ -1,4 +1,4 @@
-<div class="item-collection">
+<div class="item-collection position-relative">
     <!-- <ng-container *ngFor="let item of items">
         <lib-card-item [item]="item"></lib-card-item>
 
@@ -6,11 +6,14 @@
 
     <ng-container
         *ngFor="let item of subject.getValue().items| paginate: { id: 'server', itemsPerPage: 4, currentPage: subject.getValue().page ,totalItems: subject.getValue().total}">
-        <lib-card-item [item]="item"></lib-card-item>
+        <div *ngIf="!loading">
+            <lib-card-item [item]="item"></lib-card-item>
+        </div>
     </ng-container>
+    <div *ngIf="loading" class="position-absolute top-50 left-50 spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
 
 </div>
-<div class="has-text-centered">
-    <div class="spinner" [ngClass]="{ 'hidden': !loading }"></div>
-    <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
-</div>
+
+<pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>

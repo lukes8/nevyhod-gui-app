@@ -13,7 +13,7 @@ export class AppComponent {
   items: BehaviorSubject<ItemVO[]> = new BehaviorSubject<ItemVO[]>([]);
   
   constructor(private itemService: ItemService) {
-    itemService.findAll4Firebase().subscribe({
+    itemService.findAll().subscribe({
       next: r => {
         console.log("received green");
         console.log(r);

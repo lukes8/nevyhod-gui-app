@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { ItemFactory, ItemVO } from 'utility-components-lib';
 
 
@@ -12,4 +13,9 @@ export class AppComponent {
 
 
   items: ItemVO[] = ItemFactory.makeDefault4List();
+  items2: BehaviorSubject<ItemVO[]> = new BehaviorSubject<ItemVO[]>(ItemFactory.makeDefault4List());
+
+  onPageChangedEvent(page: number) {
+    alert('Hi green, I got a message: ' + page);
+  }
 }

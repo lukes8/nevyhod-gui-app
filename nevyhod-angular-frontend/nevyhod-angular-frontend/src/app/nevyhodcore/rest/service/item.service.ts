@@ -19,7 +19,11 @@ export class HttpOptions {
 
     static make4Json(): HttpOptions {
         let opt = new HttpOptions();
-        opt.headers = new HttpHeaders({ 'Content-Type': MediaType.json, 'Accept': MediaType.json, 'Authorization': `Basic ${btoa('luke:luke')}` });
+        opt.headers = new HttpHeaders({
+            'Content-Type': MediaType.json,
+            'Accept': MediaType.json,
+            'Authorization': `Basic ${btoa('luke:luke')}`
+        });
         opt.resType = 'json';
         return opt;
     }
@@ -34,7 +38,7 @@ export class HttpOptions {
         return {
             headers: this.headers,
             responseType: this.resType,
-            
+
         }
     }
 }

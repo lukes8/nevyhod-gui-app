@@ -6,4 +6,5 @@
     justify-content: center;
     max-width: 100%;
     flex-wrap: wrap;
+    min-height: 470px;
 }

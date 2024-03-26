@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ItemVO } from '../factory/item-model';
 import { ItemFactory } from '../factory/item-factory';
 import { PaginationComponent } from '../pagination/pagination.component';
@@ -15,6 +15,7 @@ export class CardItemCollectionComponent implements OnInit {
 
   @Input() items: ItemVO[] = [];
   @Input() items2: BehaviorSubject<ItemVO[]>;
+  @Output() pageChangedEvent = new EventEmitter<number>();
   asyncItems$: Observable<ItemVO[]>;
   subject: BehaviorSubject<IServerResponse> = new BehaviorSubject<IServerResponse>(
     {
@@ -26,6 +27,7 @@ export class CardItemCollectionComponent implements OnInit {
   total: number;
   loading: boolean = false;
   page: number = 1;
+
 
   constructor() {
   }
@@ -40,9 +42,19 @@ export class CardItemCollectionComponent implements OnInit {
   }
 
   getPage(page: number) {
+    this.loading = true;
+    this.pageChangedEvent.emit(page);
+    // this.subject.next(
+    //   {
+    //     items: [],
+    //     total: this.subject.getValue().total,
+    //     page: this.subject.getValue().page
+    //   }
+    // );
     this.paginationHelper.getPage(page).subscribe(r => {
       this.subject.next(r);
-      console.log(r)
+      console.log(r);
+      this.loading = false;
     });
   }
 }
