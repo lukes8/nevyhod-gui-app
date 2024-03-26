@@ -4,4 +4,4 @@
 </div>
 
 <lib-table-grid-basic></lib-table-grid-basic>
-<lib-card-item-collection [items]="items.getValue()" [items2]="items"></lib-card-item-collection>
+<lib-card-item-collection (pageChangedEvent)="onPageChangedEvent($event)" [subject]="subject"></lib-card-item-collection>

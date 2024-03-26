@@ -5,7 +5,7 @@
     </ng-container> -->
 
     <ng-container
-        *ngFor="let item of subject.getValue().items| paginate: { id: 'server', itemsPerPage: 4, currentPage: subject.getValue().page ,totalItems: subject.getValue().total}">
+        *ngFor="let item of subject.getValue().items | paginate: { id: 'server', itemsPerPage: subject.getValue().perPage, currentPage: subject.getValue().page ,totalItems: subject.getValue().total}">
         <div *ngIf="!loading">
             <lib-card-item [item]="item"></lib-card-item>
         </div>

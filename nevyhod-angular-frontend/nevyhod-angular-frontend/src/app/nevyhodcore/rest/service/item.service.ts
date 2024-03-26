@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { ItemVO } from "../../model/item-model";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { Pageable, PageableFactory } from 'utility-components-lib';
 
 interface IService {
     findAll(): Observable<any>;
@@ -58,6 +58,12 @@ export class ItemService implements IService {
         let suffix = "items";
         return this.http
             .get(this.baseUrl + suffix, this.options4Json.get());
+    }
+    findAllByPageable(pageable: Pageable): Observable<any> {
+        let suffix = "items";
+        let finalUrl = this.baseUrl + suffix + "?" + PageableFactory.makeObject4UrlParams(pageable);
+        console.log(finalUrl)
+        return this.http.get(finalUrl, this.options4Json.get());
     }
     findAll4Firebase(): Observable<any> {
         let suffix = "firebase/items";

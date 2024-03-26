@@ -40,4 +40,7 @@ public class Item {
     private Integer status;
     @Column(name = "ENABLED")
     private Boolean enabled;
+    @Column(name = "IMAGE_PATH")
+    private String imagePath;
+
 }

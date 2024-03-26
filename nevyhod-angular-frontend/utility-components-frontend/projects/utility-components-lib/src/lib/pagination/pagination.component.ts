@@ -16,7 +16,8 @@ export class PaginationComponent implements OnInit {
     {
       items: [],
       total: 0,
-      page: 0
+      page: 0,
+      perPage: 4
     }
   );
   itemsArray: ItemVO[];

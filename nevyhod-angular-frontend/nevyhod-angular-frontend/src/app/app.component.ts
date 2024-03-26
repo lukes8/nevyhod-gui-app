@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { ItemService } from './nevyhodcore/rest/service/item.service';
-import { ItemFactory, ItemVO } from 'utility-components-lib';
-import { BehaviorSubject } from 'rxjs';
+import { ItemFactory, ItemVO, IServerResponse } from 'utility-components-lib';
+import { BehaviorSubject, delay, of } from 'rxjs';
+import { PageableFactory } from 'utility-components-lib';
+// import { IServerResponse, PaginationHelper } from 'utility-components-lib/lib/util/pagination-factory';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +12,32 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AppComponent {
   title = 'angular-frontend';
-  items: BehaviorSubject<ItemVO[]> = new BehaviorSubject<ItemVO[]>([]);
-  
+  itemsSubject: BehaviorSubject<ItemVO[]> = new BehaviorSubject<ItemVO[]>([]);
+  subject: BehaviorSubject<IServerResponse> = new BehaviorSubject<IServerResponse>(
+    {
+      items: [],
+      page: 1,
+      total: 0,
+      perPage: 4
+    }
+  );
+
   constructor(private itemService: ItemService) {
-    itemService.findAll().subscribe({
+    this.findAll(0);
+  }
+
+  findAll(page: number) {
+    let pageable = PageableFactory.makeObject(page-1, 3, []);
+    this.itemService.findAllByPageable(pageable).subscribe({
       next: r => {
         console.log("received green");
         console.log(r);
-        // this.items.next(ItemFactory.makeDefault4List());
-        this.items.next(r);
+        this.subject.next({
+          items: r.content,
+          total: r.totalElements,
+          page: page,
+          perPage: pageable.perPage
+        });
       },
       error: e => {
         console.error("received error");
@@ -30,5 +49,11 @@ export class AppComponent {
     })
   }
 
+  onPageChangedEvent(page: number) {
+    of("dummy observable timer").pipe(delay(1000)).subscribe(r => {
+      console.log(r);
+      this.findAll(page);
+    });
+  }
 
 }
