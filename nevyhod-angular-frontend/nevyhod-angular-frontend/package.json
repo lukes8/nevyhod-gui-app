@@ -21,7 +21,7 @@
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0",
-    "utility-components-lib": "file:C:\\Users\\lukas.sipinka\\Documents\\developer\\2022-2023\\github\\nevyhod-gui-app\\nevyhod-angular-frontend\\utility-components-frontend\\dist\\utility-components-lib",
+    "utility-components-lib": "file:../utility-components-frontend/dist/utility-components-lib",
     "ag-grid-angular": "^31.1.1",
     "bootstrap": "^5.3.3",
     "ngx-pagination": "^6.0.3"

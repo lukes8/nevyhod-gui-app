@@ -21,6 +21,135 @@ export class AppComponent {
       perPage: 4
     }
   );
+  touchedCategoryList: boolean = false;
+  categoryItems: CategoryItem[] = [
+    {
+      title: 'Auto',
+      touched: false,
+      styleIcon: 'fa-car',
+      childs: [
+        {
+          title: 'Cela kategorie',
+          touched: false,
+          styleIcon: '',
+          childs: []
+        },
+        {
+          title: 'Automobily',
+          touched: false,
+          styleIcon: '',
+          childs: []
+        }
+      ]
+    },
+    {
+      title: 'Auto',
+      touched: false,
+      styleIcon: 'fa-car',
+      childs: [
+        {
+          title: 'Cela kategorie',
+          touched: false,
+          styleIcon: '',
+          childs: []
+        },
+        {
+          title: 'Automobily',
+          touched: false,
+          styleIcon: '',
+          childs: []
+        }
+      ]
+    },
+    {
+      title: 'Auto',
+      touched: false,
+      styleIcon: 'fa-car',
+      childs: [
+        {
+          title: 'Cela kategorie',
+          touched: false,
+          styleIcon: '',
+          childs: []
+        },
+        {
+          title: 'Automobily',
+          touched: false,
+          styleIcon: '',
+          childs: []
+        }
+      ]
+    },
+    {
+      title: 'Auto',
+      touched: false,
+      styleIcon: 'fa-car',
+      childs: [
+        {
+          title: 'Cela kategorie',
+          touched: false,
+          styleIcon: '',
+          childs: []
+        },
+        {
+          title: 'Automobily',
+          touched: false,
+          styleIcon: '',
+          childs: []
+        }
+      ]
+    },
+    {
+      title: 'Auto',
+      touched: false,
+      styleIcon: 'fa-car',
+      childs: [
+        {
+          title: 'Cela kategorie',
+          touched: false,
+          styleIcon: '',
+          childs: []
+        },
+        {
+          title: 'Automobily',
+          touched: false,
+          styleIcon: '',
+          childs: []
+        }
+      ]
+    },
+    {
+      title: 'Chovatelstvi',
+      touched: false,
+      styleIcon: 'fa-paw',
+      childs: []
+    },
+    {
+      title: 'Potraviny',
+      touched: false,
+      styleIcon: 'fa-utensils',
+      childs: []
+    },
+    {
+      title: 'Potraviny',
+      touched: false,
+      styleIcon: 'fa-utensils',
+      childs: []
+    },
+    {
+      title: 'Potraviny',
+      touched: false,
+      styleIcon: 'fa-utensils',
+      childs: []
+    },
+    {
+      title: 'Potraviny',
+      touched: false,
+      styleIcon: 'fa-utensils',
+      childs: []
+    },
+
+  ];
 
   constructor() {
     this.subject.next({
@@ -44,5 +173,39 @@ export class AppComponent {
     });
   }
 
+  onCategoryList() {
+    this.touchedCategoryList = true;
+  }
 
+  onCategoryItem(item: CategoryItem, useTouched: boolean) {
+    let touched = !item.touched;
+    console.log(touched === item.touched)
+    if (useTouched && item.childs.length > 0) {
+      this.resetItems4Touched(item);
+      console.log(item.touched);
+      item.touched = touched;
+      console.log(item.touched);
+    }
+    console.log(item.title);
+  }
+
+  onClickOutside() {
+    this.touchedCategoryList = false;
+  }
+
+  resetItems4Touched(item: CategoryItem) {
+    this.categoryItems.forEach(i => {
+      i.touched = false;
+      if (item === i) {
+        console.log('here I am. The same reference. Everything is an object (except of some exceptions)');
+      }
+    })
+  }
+}
+
+export interface CategoryItem {
+  title: string;
+  touched: boolean;
+  styleIcon: string;
+  childs: CategoryItem[];
 }

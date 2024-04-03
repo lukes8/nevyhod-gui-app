@@ -57,3 +57,18 @@ AWS
 
 Java 17 features
 
+### Best practices
+https://github.com/in28minutes/java-best-practices?tab=readme-ov-file#why-should-you-understand-performance-of-string-concatenation
+https://howtodoinjava.com/java-best-practices/
+https://www.javacodegeeks.com/2015/06/java-programming-tips-best-practices-beginners.html
+https://github.com/dereknguyen269/programing-best-practices-in-2024?tab=readme-ov-file#java-best-practices
+
+Immutables
+https://reflectoring.io/java-immutables/#immutable-bad-practices
+https://reflectoring.io/java-immutables/
+
+https://www.baeldung.com/java-string-concatenation-methods
+https://github.com/eugenp/tutorials/tree/master/core-java-modules/core-java-string-operations-6
+
+JMH Java Microbenchanchmark Harness framework in Java (under maven) to measure performance between small code snippets 
+
