@@ -71,3 +71,21 @@
     cursor: pointer;
     background-color: rgb(0, 0, 0, .1);
 }
+
+.category-input {
+    // pointer-events: none;
+}
+
+.category-input:hover input {
+    cursor: pointer;
+}
+
+.category-input:hover .btn:hover {
+
+}
+
+.category-input:hover .btn {
+    color: var(--bs-btn-hover-color);
+    background-color: var(--bs-btn-hover-bg);
+    border-color: var(--bs-btn-hover-border-color);
+}

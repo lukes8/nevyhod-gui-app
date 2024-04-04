@@ -1,19 +1,28 @@
-<div class="card">
-    <div class="header">
-        <img [src]="item.imagePath" [alt]="item.title">
-    </div>
-    <div class="content">
-        <h2>Title</h2>
-        <h4>{{ item.title }}</h4>
-        <p>{{ item.description }}
-        </p>
-        <div class="d-flex justify-content-end">
-            <lib-form-button type="btn-star"></lib-form-button>
-        </div>
+<div class="card" (click)="onFlipCard()">
+    <div class="flip-card-inner" [ngClass]="[flipCard ? 'flip-card-rotate-180' : '']">
 
-    </div>
-    <div class="footer">
-        <lib-form-button type="btn-add"></lib-form-button>
-        <lib-form-button type="btn-buy"></lib-form-button>
+        <div class="flip-card-front">
+            <div class="header">
+                <img [src]="item.imagePath" [alt]="item.title">
+            </div>
+            <div class="content">
+                <h2>Title</h2>
+                <h4>{{ item.title }}</h4>
+                <p>{{ item.description }}
+                </p>
+                <div class="d-flex justify-content-end">
+                    <lib-form-button type="btn-star"></lib-form-button>
+                </div>
+
+            </div>
+            <div class="footer">
+                <lib-form-button type="btn-add"></lib-form-button>
+                <lib-form-button type="btn-buy"></lib-form-button>
+            </div>
+        </div>
+        <div class="flip-card-back">
+            <h2>Title</h2>
+            <p>{{ item.description }}</p>
+        </div>
     </div>
 </div>

@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UtilityComponentsLibModule } from 'utility-components-lib';
 import { SubtitleDirective } from './subtitle.directive';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { SubtitleDirective } from './subtitle.directive';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    UtilityComponentsLibModule
+    UtilityComponentsLibModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

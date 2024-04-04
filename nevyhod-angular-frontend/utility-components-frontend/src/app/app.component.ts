@@ -21,9 +21,16 @@ export class AppComponent {
       perPage: 4
     }
   );
-  touchedCategoryList: boolean = false;
+  visibility4CategoryList: boolean = false;
+  categoryItem: string;
   categoryItems: CategoryItem[] = [
     {
+      title: 'Vsechno',
+      touched: false,
+      styleIcon: '',
+      childs: []
+    }
+    , {
       title: 'Auto',
       touched: false,
       styleIcon: 'fa-car',
@@ -151,6 +158,7 @@ export class AppComponent {
 
   ];
 
+
   constructor() {
     this.subject.next({
       items: PaginationHelper.sliceItems(ItemFactory.makeDefault4List(), 1, 4),
@@ -174,23 +182,26 @@ export class AppComponent {
   }
 
   onCategoryList() {
-    this.touchedCategoryList = true;
+    this.visibility4CategoryList = true;
   }
 
   onCategoryItem(item: CategoryItem, useTouched: boolean) {
     let touched = !item.touched;
     console.log(touched === item.touched)
-    if (useTouched && item.childs.length > 0) {
+    if (useTouched && this.hasChilds(item)) {
       this.resetItems4Touched(item);
       console.log(item.touched);
       item.touched = touched;
       console.log(item.touched);
+    } else {
+      console.log(item.title);
+      this.categoryItem = item.title;
+      this.visibility4CategoryList = false;
     }
-    console.log(item.title);
   }
 
   onClickOutside() {
-    this.touchedCategoryList = false;
+    this.visibility4CategoryList = false;
   }
 
   resetItems4Touched(item: CategoryItem) {
@@ -201,11 +212,15 @@ export class AppComponent {
       }
     })
   }
+  hasChilds(item: CategoryItem): boolean {
+    return item.childs !== undefined && item.childs.length > 0;
+  }
 }
 
-export interface CategoryItem {
+export class CategoryItem {
   title: string;
   touched: boolean;
   styleIcon: string;
   childs: CategoryItem[];
+
 }

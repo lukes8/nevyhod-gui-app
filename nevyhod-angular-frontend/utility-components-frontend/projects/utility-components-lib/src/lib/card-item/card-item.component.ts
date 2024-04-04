@@ -10,4 +10,10 @@ import { ItemFactory } from '../factory/item-factory';
 export class CardItemComponent {
 
   @Input() item: ItemVO = ItemFactory.makeDefault();
+
+  flipCard: boolean = false;
+
+  onFlipCard() {
+    this.flipCard = !this.flipCard;
+  }
 }

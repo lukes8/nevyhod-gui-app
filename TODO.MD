@@ -1,4 +1,4 @@
-## TODO list, innovations, techstack, algorithm, design patterns, area of focus
+### Tools, Best practices, Tech stack, Innovations, Design Patterns, Principles, TODO focus
 
 AOP
 - log memory info before and after method call
@@ -72,3 +72,17 @@ https://github.com/eugenp/tutorials/tree/master/core-java-modules/core-java-stri
 
 JMH Java Microbenchanchmark Harness framework in Java (under maven) to measure performance between small code snippets 
 
+Angular multiselect component
+https://nileshpatel17.github.io/ng-multiselect-dropdown/
+
+#### UI component libraries
+https://adminkit.io/  
+https://demo.adminkit.io/
+
+MDB
+https://mdbootstrap.com/freebies/admin/
+
+https://fontawesome.com/icons/location-dot?f=classic&s=solid
+
+https://www.mariokandut.com/what-is-routing-in-angular-with-basic-example/
+https://www.telerik.com/blogs/angular-basics-using-hostlistener-decorator-detect-changes-specific-dom-element
