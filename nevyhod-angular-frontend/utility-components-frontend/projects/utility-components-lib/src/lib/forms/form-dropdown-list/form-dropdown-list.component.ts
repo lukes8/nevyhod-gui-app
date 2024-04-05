@@ -1,26 +1,20 @@
 import { Component } from '@angular/core';
-import { IServerResponse, PaginationHelper } from 'projects/utility-components-lib/src/lib/util/pagination-factory';
-import { BehaviorSubject, Observable, delay, of } from 'rxjs';
-import { ItemFactory, ItemVO } from 'utility-components-lib';
 
+export class CategoryItem {
+  title: string;
+  touched: boolean;
+  styleIcon: string;
+  childs: CategoryItem[];
+
+}
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'lib-form-dropdown-list',
+  templateUrl: './form-dropdown-list.component.html',
+  styleUrls: ['../forms.scss']
 })
-export class AppComponent {
-  title = 'utility-components-frontend';
+export class FormDropdownListComponent {
 
-  items: ItemVO[] = ItemFactory.makeDefault4List();
-  subject: BehaviorSubject<IServerResponse> = new BehaviorSubject<IServerResponse>(
-    {
-      items: [],
-      page: 1,
-      total: 0,
-      perPage: 4
-    }
-  );
   visibility4CategoryList: boolean = false;
   categoryItem: string;
   categoryItems: CategoryItem[] = [
@@ -158,29 +152,6 @@ export class AppComponent {
 
   ];
 
-
-  constructor() {
-    this.subject.next({
-      items: PaginationHelper.sliceItems(ItemFactory.makeDefault4List(), 1, 4),
-      page: 1,
-      total: ItemFactory.makeDefault4List().length,
-      perPage: 4
-    })
-  }
-
-  onPageChangedEvent(page: number) {
-
-    of("dummy observable timer").pipe(delay(1000)).subscribe(r => {
-      console.log(r);
-      this.subject.next({
-        items: PaginationHelper.sliceItems(ItemFactory.makeDefault4List(), page, 4),
-        page: page,
-        total: ItemFactory.makeDefault4List().length,
-        perPage: 4
-      })
-    });
-  }
-
   onCategoryList() {
     this.visibility4CategoryList = true;
   }
@@ -215,43 +186,4 @@ export class AppComponent {
   hasChilds(item: CategoryItem): boolean {
     return item.childs !== undefined && item.childs.length > 0;
   }
-
-
-  onSelect(data: any): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
-  }
-
-  onActivate(data: any): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
-  }
-
-  onDeactivate(data: any): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
-  }
-
-  dataset = [
-    { name: "Shares", value: 400 },
-    { name: "Realty", value: 362 },
-    { name: "Bitcoin", value: 160 },
-    { name: "ETF", value: 84 },
-    { name: "Bond", value: 30 },
-    { name: "Gold", value: 10 },
-  ];
-
-  colors = [
-    { name: "Shares", value: "#ff00ff" },
-    { name: "Realty", value: "#0ff0ff" },
-    { name: "Bitcoin", value: "#fcc0ff" },
-    { name: "ETF", value: "#cc00ff" },
-    { name: "Bond", value: "#0f00ff" },
-    { name: "Gold", value: "#00f0ff" },
-  ];
-}
-
-export class CategoryItem {
-  title: string;
-  touched: boolean;
-  styleIcon: string;
-  childs: CategoryItem[];
-
 }

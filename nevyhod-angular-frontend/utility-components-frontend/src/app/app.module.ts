@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { UtilityComponentsLibModule } from 'utility-components-lib';
 import { SubtitleDirective } from './subtitle.directive';
 import { FormsModule } from '@angular/forms';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     UtilityComponentsLibModule,
-    FormsModule
+    FormsModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -57,6 +57,8 @@ AWS
 
 Java 17 features
 
+Kafka
+
 ### Best practices
 https://github.com/in28minutes/java-best-practices?tab=readme-ov-file#why-should-you-understand-performance-of-string-concatenation
 https://howtodoinjava.com/java-best-practices/
@@ -75,7 +77,9 @@ JMH Java Microbenchanchmark Harness framework in Java (under maven) to measure p
 Angular multiselect component
 https://nileshpatel17.github.io/ng-multiselect-dropdown/
 
-#### UI component libraries
+
+
+#### UI component libraries, resources 
 https://adminkit.io/  
 https://demo.adminkit.io/
 
@@ -86,3 +90,18 @@ https://fontawesome.com/icons/location-dot?f=classic&s=solid
 
 https://www.mariokandut.com/what-is-routing-in-angular-with-basic-example/
 https://www.telerik.com/blogs/angular-basics-using-hostlistener-decorator-detect-changes-specific-dom-element
+
+Peer dependencies
+https://nodejs.org/en/blog/npm/peer-dependencies/
+https://dev.to/icy0307/peer-dependencies-in-depth-1o3b
+
+npm install @swimlane/ngx-charts --save --legacy-peer-deps
+npm install @types/d3 --save-dev
+"peerDependencies": {
+"@types/d3": "^7.4.3",
+"@angular/cdk": "^16.2.0"
+
+}
+https://github.com/swimlane/ngx-charts/blob/master/docs/examples/pie-charts/pie-chart.md
+
+

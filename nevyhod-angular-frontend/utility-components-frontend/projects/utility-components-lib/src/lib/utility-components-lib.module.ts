@@ -19,6 +19,8 @@ import { ColumnListComponent } from './graphs/algo-sorting-graph/column-list/col
 import { FormsModule } from '@angular/forms';
 import { PaginationComponent } from './pagination/pagination.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FormDropdownListComponent } from './forms/form-dropdown-list/form-dropdown-list.component';
+import { FormTextfieldComponent } from './forms/form-textfield/form-textfield.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AlgoSortingGraphComponent,
     ColumnComponent,
     ColumnListComponent,
-    PaginationComponent
+    PaginationComponent,
+    FormDropdownListComponent,
+    FormTextfieldComponent
   ],
   imports: [CommonModule, TableGridBasicComponent, HttpClientModule, FormsModule,
             NgxPaginationModule],
@@ -48,7 +52,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormButtonComponent,
     CardItemComponent, CardItemCollectionComponent,
     AlgoSortingGraphComponent,
-    PaginationComponent
+    PaginationComponent,
+    FormDropdownListComponent,
+    FormTextfieldComponent
   ]
 })
 export class UtilityComponentsLibModule { }

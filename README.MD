@@ -6,7 +6,11 @@ utility-components-frontend
 ng build utility-components-lib --watch
 ng serve
 
+Next useful NPM commands
+Check if there are any updates for project dependencies
+npm outdated
 
+npm info @swimlane/ngx-charts  peerDependencies
 ```
 
 

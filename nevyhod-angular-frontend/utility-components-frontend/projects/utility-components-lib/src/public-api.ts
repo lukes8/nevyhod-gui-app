@@ -16,3 +16,5 @@ export * from './lib/factory/item-factory';
 export * from './lib/factory/item-model';
 export * from './lib/pagination/pagination.component';
 export * from './lib/util/pagination-factory';
+export * from './lib/forms/form-dropdown-list/form-dropdown-list.component';
+export * from './lib/forms/form-textfield/form-textfield.component';

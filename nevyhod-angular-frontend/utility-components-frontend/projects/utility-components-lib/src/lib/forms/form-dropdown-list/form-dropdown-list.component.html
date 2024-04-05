@@ -1,0 +1,35 @@
+<div class="input-group col-md-4" (click)="onCategoryList()">
+    <button class="btn btn-outline-secondary" type="button">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+    <input [(ngModel)]="categoryItem" class="form-control py-2" type="search" id="example-search-input"
+        placeholder="Jakou kategorii?" readonly="readonly">
+</div>
+
+
+<div class="overlay-screen" *ngIf="visibility4CategoryList">
+</div>
+<div class="category-list" *ngIf="visibility4CategoryList" (clickOutside)="onClickOutside()">
+    <h3>Vyber kategorii</h3>
+    <ng-container *ngFor="let item of categoryItems">
+        <div (click)="onCategoryItem(item, true)" class="category-item">
+            <i class="fa-solid" [ngClass]="[item.styleIcon !== '' ? item.styleIcon : '']"></i>
+            <span>
+                {{ item.title }}
+            </span>
+            <i class="fa-solid"
+                [ngClass]="[hasChilds(item) ? (item.touched ? 'fa-chevron-up' : 'fa-chevron-down' ) : '' ]"></i>
+        </div>
+        <div class="category-list-sub animated" *ngIf="item.touched && hasChilds(item)">
+            <ng-container *ngFor="let child of item.childs">
+                <div (click)="onCategoryItem(child, false)" class="category-item">
+                    <i></i>
+                    <span>
+                        {{ child.title }}
+                    </span>
+                    <i></i>
+                </div>
+            </ng-container>
+        </div>
+    </ng-container>
+</div>
