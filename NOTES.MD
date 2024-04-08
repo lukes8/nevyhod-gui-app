@@ -57,9 +57,26 @@ AWS
 
 Java 17 features
 
+Messaging system
 Kafka
 
-### Best practices
+Angular topics, todo
+- flip card (desc, title, tags, map, category, number of watchers)
+- tags location, time added, status (used, new), weight
+- buttons
+- footer, header, routing
+- detail
+- security 
+- firestore entities
+- table with users - user statistics report
+- table with logs - audit logs 
+- user detail with tabs (first tab reports, second tab logs, third tab statistics charts)
+- table grid with refinements #table_grid (expand row that has childs, for eg. user and his list of orders)
+- #table_grid dropdown box to list all users according privilege or to list all users according location with specific title (for eg. Praque user1, user2, etc.)
+
+
+
+### Best practices + notes
 https://github.com/in28minutes/java-best-practices?tab=readme-ov-file#why-should-you-understand-performance-of-string-concatenation
 https://howtodoinjava.com/java-best-practices/
 https://www.javacodegeeks.com/2015/06/java-programming-tips-best-practices-beginners.html

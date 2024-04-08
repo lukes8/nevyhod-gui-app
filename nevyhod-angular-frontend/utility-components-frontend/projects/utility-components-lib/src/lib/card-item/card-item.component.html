@@ -6,8 +6,8 @@
                 <img [src]="item.imagePath" [alt]="item.title">
             </div>
             <div class="content">
-                <h2>Title</h2>
-                <h4>{{ item.title }}</h4>
+                <h2>{{ item.title }}</h2>
+                <h4>{{ item.category }}</h4>
                 <p>{{ item.description }}
                 </p>
                 <div class="d-flex justify-content-end">
@@ -23,6 +23,7 @@
         <div class="flip-card-back">
             <h2>Title</h2>
             <p>{{ item.description }}</p>
+            <p>{{ item.mapUrl }}</p>
         </div>
     </div>
 </div>

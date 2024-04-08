@@ -21,6 +21,7 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormDropdownListComponent } from './forms/form-dropdown-list/form-dropdown-list.component';
 import { FormTextfieldComponent } from './forms/form-textfield/form-textfield.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -44,7 +45,7 @@ import { FormTextfieldComponent } from './forms/form-textfield/form-textfield.co
     FormTextfieldComponent
   ],
   imports: [CommonModule, TableGridBasicComponent, HttpClientModule, FormsModule,
-            NgxPaginationModule],
+    NgxPaginationModule, BrowserAnimationsModule],
   exports: [
     UtilityComponentsLibComponent,
     TableGridBasicComponent,
