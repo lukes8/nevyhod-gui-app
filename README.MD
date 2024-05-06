@@ -2,7 +2,7 @@
 This repository is used to demonstrate interesting topics around Full Stack development, specifically around Java and Angular (backend and frontend, BE + FE).
 
 The main intention is to collect and practice innovative ideas in high level (or under the hood) on real story examples. Every story example should be ideally related to base main story - nevyhod (coming from repository title).
-As a developer you can meet with a lot of useful core aspects such as: patterns, best practices, database concepts, libraries, prototyping, design, devops, k8s, and so on and so forth.
+As a developer you can meet with a lot of useful core aspects such as: patterns, best practices, database concepts, useful libraries, prototyping, frontend design, custom libs, devops, k8s, docker, and so on and so forth.
 
 So feel free to use it and enjoy
 
