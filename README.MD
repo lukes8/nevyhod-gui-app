@@ -5,6 +5,8 @@ The main intention is to collect and practice innovative ideas in high level (or
 
 As a developer you can meet with a lot of useful core aspects such as: patterns, best practices, database concepts, useful libraries, prototyping, frontend design, custom libs, devops, k8s, docker, configurations, performance tuning and so on and so forth.
 
+👇 ** The project is still in progress state and hence please keep in mind there might be some non-working code, missing parts or whatever. ** 👇 
+
 So feel free to use it and enjoy
 
 
