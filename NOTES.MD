@@ -122,3 +122,13 @@ npm install @types/d3 --save-dev
 https://github.com/swimlane/ngx-charts/blob/master/docs/examples/pie-charts/pie-chart.md
 
 
+### Resources for useful web sites
+- https://www.appsdeveloperblog.com/document-spring-rest-api-with-openapi-3swagger/
+- https://plugins.gradle.org/plugin/io.swagger.core.v3.swagger-gradle-plugin
+- https://stackoverflow.com/questions/49654143/spring-security-5-there-is-no-passwordencoder-mapped-for-the-id-null
+
+
+### Databases, NoSQL firebase, h2
+```
+
+```
